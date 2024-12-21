@@ -20,6 +20,7 @@ export class EventsService {
 
   @Transactional()
   async create(companyId: string, createEventDto: CreateEventDto) {
+    console.log(companyId, createEventDto);
     try {
       const { schedule, ...eventDto } = createEventDto;
       const event = await this.txHost.tx.event.create({
