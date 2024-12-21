@@ -1,0 +1,83 @@
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { compareSync, hashSync } from 'bcrypt';
+import * as process from 'process';
+import { CompaniesService } from '../companies/companies.service';
+
+@Injectable()
+export class AuthService {
+  constructor(
+    private companiesService: CompaniesService,
+    private jwtService: JwtService,
+  ) {}
+
+  async signUp(email: string, name: string, password: string) {
+    console.log(email, name, password)
+    const candidate = await this.companiesService.findOne(email);
+    if (candidate) throw new BadRequestException('Company already signed up!');
+    const newCompany = await this.companiesService.create({
+      email,
+      name,
+      password: hashSync(password, 10),
+    });
+    const { password: pass, ...result } = newCompany;
+    return result;
+  }
+
+  async signIn(email: string, password: string) {
+    const company = await this.companiesService.findOne(email);
+    if (!company || !compareSync(password, company.password)) {
+      throw new UnauthorizedException();
+    }
+    const { password: pass, ...result } = company;
+    const accessToken = await this.jwtService.signAsync(
+      { email: result.email, id: result.id, name: result.name },
+      {
+        secret: process.env.JWT_SECRET,
+        expiresIn: '90d',
+      },
+    );
+    return { accessToken, ...result };
+  }
+
+  async signInWithOAuth(email: string, name: string) {
+    let company = await this.companiesService.findOne(email);
+    if (!company) {
+      const newCompany = await this.companiesService.create({
+        email,
+        name,
+        password: '',
+      });
+      company = await this.companiesService.findOne(email);
+    }
+    const { password: pass, ...result } = company;
+    const accessToken = await this.jwtService.signAsync(
+      { email: result.email, id: result.id, name: result.name },
+      {
+        secret: process.env.JWT_SECRET,
+        expiresIn: '90d',
+      },
+    );
+    return { accessToken, ...result };
+  }
+
+  async auth(accessToken?: string) {
+    if (!accessToken) throw new UnauthorizedException();
+    try {
+      const data = this.jwtService.verify(accessToken, {
+        secret: process.env.JWT_SECRET,
+      });
+      const company = await this.companiesService.findOne(data.email);
+      if (!company) {
+        throw new UnauthorizedException();
+      }
+      return company;
+    } catch (e) {
+      throw new UnauthorizedException();
+    }
+  }
+}

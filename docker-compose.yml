@@ -1,0 +1,40 @@
+services:
+  web:
+    image: online-queue-client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - '3001:80'
+    env_file: './client/.env'
+    environment:
+      - PORT=80
+      - NEXTAUTH_URL=http://localhost:3001
+      - API_URL=http://server:3000
+    depends_on:
+      - db
+      - server
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    env_file: './server/.env'
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/onlinequeue?schema=public
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=onlinequeue
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

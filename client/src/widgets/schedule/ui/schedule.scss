@@ -1,0 +1,71 @@
+.fc .fc-button {
+	@apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border-0 #{!important};
+}
+.fc .fc-button-primary {
+	@apply bg-primary text-primary-foreground shadow hover:bg-primary/90 #{!important};
+}
+.fc .fc-button-group {
+	@apply inline-flex items-center gap-3 #{!important};
+}
+
+.fc .fc-scroller-liquid-absolute {
+	&::-webkit-scrollbar {
+		background: transparent !important;
+		width: 5px;
+	}
+	&::-webkit-scrollbar-thumb {
+		@apply bg-primary rounded;
+	}
+}
+
+.fc-scrollgrid {
+	@apply rounded-t-lg overflow-hidden #{!important};
+}
+
+.fc-theme-standard th {
+	@apply bg-secondary #{!important};
+}
+
+.fc .fc-highlight {
+	@apply bg-black/5;
+}
+
+.fc .fc-daygrid-day {
+	@apply transition-all cursor-pointer;
+	&:hover {
+		@apply bg-secondary;
+	}
+}
+
+.fc-v-event .fc-event-main-frame {
+	@apply p-1;
+}
+
+.fc-v-event {
+	@apply bg-black bg-opacity-60 backdrop-blur transition-all border-0;
+	&:hover {
+		@apply bg-opacity-100;
+	}
+}
+
+.fc .fc-timegrid-col.fc-day-today {
+	@apply bg-secondary;
+}
+.fc .fc-daygrid-day.fc-day-today {
+	@apply bg-red-200	 font-semibold;
+	&:hover {
+		@apply bg-red-100;
+	}
+}
+
+.fc-daygrid-event-dot {
+	@apply border-destructive;
+}
+
+.fc .fc-view-harness {
+	@apply shadow-lg;
+}
+
+.fc .fc-button-group > .fc-button.fc-button-active {
+	@apply bg-background text-primary border #{!important};
+}
