@@ -7,6 +7,7 @@ export const serializeAppointmentsFromEvent = (
 	events: EventWithRelations[]
 ) => {
 	try {
+		console.log(new Date())
 		const appointments = events.reduce((acc, event) => {
 			return [...acc, ...event.appointments]
 		}, [] as AppointmentWithRelations[])
