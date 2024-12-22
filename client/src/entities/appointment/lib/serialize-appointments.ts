@@ -1,6 +1,5 @@
 import { Customer } from '@/entities/customer/model'
 import { EventWithRelations } from '@/entities/event/model'
-import { setDateHours } from '@/shared/lib/utils'
 import { EventInput } from '@fullcalendar/core'
 import { AppointmentWithRelations } from '../model'
 
@@ -14,19 +13,35 @@ export const serializeAppointmentsFromEvent = (
 		const serializedAppointments: Array<
 			EventInput & { customer: Customer; event: Event }
 		> = appointments.map(appointment => {
-			const start = setDateHours(
-				new Date(appointment.date),
+			const start = new Date(appointment.date)
+			const startTimezone = -start.getTimezoneOffset()
+			start.setUTCMinutes(
+				startTimezone > 0
+					? start.getUTCMinutes() + startTimezone
+					: start.getUTCMinutes() - startTimezone
+			)
+			start.setUTCHours(
 				+appointment.duration.from.split(':')[0],
 				+appointment.duration.from.split(':')[1]
 			)
-			console.log('new start', start)
+			if (startTimezone > 0) {
+				start.setMinutes(start.getMinutes() - startTimezone)
+			} else start.setMinutes(start.getMinutes() + startTimezone)
 
 			const end = new Date(appointment.date)
-			end.setHours(
-				+appointment.duration.to.split(':')[0],
-				+appointment.duration.to.split(':')[1],
-				0
+			const endTimezone = -end.getTimezoneOffset()
+			end.setUTCMinutes(
+				endTimezone > 0
+					? end.getUTCMinutes() + endTimezone
+					: end.getUTCMinutes() - endTimezone
 			)
+			end.setUTCHours(
+				+appointment.duration.to.split(':')[0],
+				+appointment.duration.to.split(':')[1]
+			)
+			if (endTimezone > 0) {
+				end.setMinutes(end.getMinutes() - endTimezone)
+			} else end.setMinutes(end.getMinutes() + endTimezone)
 
 			const rrule =
 				appointment.weekDay != undefined
@@ -68,7 +83,8 @@ export const serializeAppointmentsFromEvent = (
 			} as any
 		})
 		return serializedAppointments
-	} catch {
+	} catch (e) {
+		console.log(e)
 		return null
 	}
 }
