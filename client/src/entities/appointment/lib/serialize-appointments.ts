@@ -14,7 +14,7 @@ export const serializeAppointmentsFromEvent = (
 			EventInput & { customer: Customer; event: Event }
 		> = appointments.map(appointment => {
 			const start = new Date(appointment.date)
-			console.log('start', start)
+			console.log('start', start.toUTCString())
 			const startTimezone = -start.getTimezoneOffset()
 			console.log('start zone', startTimezone)
 			start.setUTCMinutes(
