@@ -14,16 +14,3 @@ export const getDateTime = (date: Date) => {
 
 	return formattedHours + ':' + formattedMinutes
 }
-
-export const setDateHours = (date: Date | string, ...args: number[]) => {
-	const newDate = new Date(date)
-	const timezoneOffset = newDate.getTimezoneOffset()
-	if (timezoneOffset > 0) {
-		newDate.setMinutes(24 * 60 - (timezoneOffset + 1))
-	} else {
-		newDate.setMinutes(-timezoneOffset)
-	}
-	//@ts-ignore
-	newDate.setUTCHours.apply(this, args)
-	return newDate
-}
