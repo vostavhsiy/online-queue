@@ -29,13 +29,10 @@ export class AppointmentsService {
   async create(createAppointmentDto: CreateAppointmentDto, tx?: PrismaClient) {
     try {
       const { duration: time, date, ...appointmentDto } = createAppointmentDto;
-      this.logger.debug('app dto:', createAppointmentDto);
       const duration = await this.durationsService.create(
         createAppointmentDto.duration,
         tx,
       );
-      this.logger.debug('app duration:', duration);
-      this.logger.debug('app date:', new Date(date));
       const appointment = await this.txHost.tx.appointment.create({
         data: {
           ...appointmentDto,
@@ -46,8 +43,6 @@ export class AppointmentsService {
           event: true,
         },
       });
-
-      this.logger.debug('app :', appointment);
       return appointment;
     } catch (e) {
       this.logger.error(e);
