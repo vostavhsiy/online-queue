@@ -7,13 +7,15 @@ export const serializeAppointmentsFromEvent = (
 	events: EventWithRelations[]
 ) => {
 	try {
-		const d = new Date()
-		const dt = new Date()
-		d.setHours(13, 0, 0, 0)
-		console.log(d)
-		console.log('------------------')
-		dt.setUTCHours(13, 0, 0, 0)
-		console.log(dt)
+		const myDate = new Date()
+		const timezoneOffset = myDate.getTimezoneOffset()
+		if (timezoneOffset > 0) {
+			myDate.setMinutes(24 * 60 - (timezoneOffset + 1))
+		} else {
+			myDate.setMinutes(-timezoneOffset) // Do not forget the negative sign !
+		}
+		myDate.setUTCHours(13)
+		console.log(myDate)
 		const appointments = events.reduce((acc, event) => {
 			return [...acc, ...event.appointments]
 		}, [] as AppointmentWithRelations[])
