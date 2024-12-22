@@ -106,8 +106,10 @@ const Schedule: FC<Props> = ({ appointments, events }) => {
 		const appointmentStartTime = data.get('from')?.toString()
 		const appointmentEndTime = data.get('to')?.toString()
 		if (!appointmentStartTime || !appointmentEndTime || !selectedDate) return
+		const date = selectedDate.start.toISOString()
+		console.log(date)
 		createAppointment({
-			date: selectedDate.start.toISOString(),
+			date,
 			duration: { from: appointmentStartTime, to: appointmentEndTime },
 			eventId: newEventId,
 		}).then(res => {
