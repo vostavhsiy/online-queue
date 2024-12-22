@@ -16,15 +16,18 @@ export const serializeAppointmentsFromEvent = (
 			const start = new Date(appointment.date)
 			console.log('start', start)
 			const startTimezone = -start.getTimezoneOffset()
+			console.log('start zone', startTimezone)
 			start.setUTCMinutes(
 				startTimezone > 0
 					? start.getUTCMinutes() + startTimezone
 					: start.getUTCMinutes() - startTimezone
 			)
+			console.log('start af minutes', start)
 			start.setUTCHours(
 				+appointment.duration.from.split(':')[0],
 				+appointment.duration.from.split(':')[1]
 			)
+			console.log('start af hourss', start)
 			if (startTimezone > 0) {
 				start.setMinutes(start.getMinutes() - startTimezone)
 			} else start.setMinutes(start.getMinutes() + startTimezone)
