@@ -35,6 +35,7 @@ export class AppointmentsService {
         tx,
       );
       this.logger.debug('app duration:', duration);
+      this.logger.debug('app date:', new Date(date));
       const appointment = await this.txHost.tx.appointment.create({
         data: {
           ...appointmentDto,
@@ -45,9 +46,11 @@ export class AppointmentsService {
           event: true,
         },
       });
+
       this.logger.debug('app :', appointment);
       return appointment;
     } catch (e) {
+      this.logger.error(e);
       throw new BadRequestException(e.message);
     }
   }
