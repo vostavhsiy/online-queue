@@ -29,10 +29,12 @@ export class AppointmentsService {
   async create(createAppointmentDto: CreateAppointmentDto, tx?: PrismaClient) {
     try {
       const { duration: time, ...appointmentDto } = createAppointmentDto;
+      this.logger.debug('app dto:', createAppointmentDto);
       const duration = await this.durationsService.create(
         createAppointmentDto.duration,
         tx,
       );
+      this.logger.debug('app duration:', duration);
       const appointment = await this.txHost.tx.appointment.create({
         data: {
           ...appointmentDto,
@@ -42,6 +44,7 @@ export class AppointmentsService {
           event: true,
         },
       });
+      this.logger.debug('app :', appointment);
       return appointment;
     } catch (e) {
       throw new BadRequestException(e.message);
