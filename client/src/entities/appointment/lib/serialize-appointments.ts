@@ -14,7 +14,7 @@ export const serializeAppointmentsFromEvent = (
 			EventInput & { customer: Customer; event: Event }
 		> = appointments.map(appointment => {
 			const start = new Date(appointment.date)
-			console.log(start, start.toISOString())
+			console.log("start:", start, start.toISOString())
 			start.setHours(+appointment.duration.from.split(':')[0])
 			start.setMinutes(+appointment.duration.from.split(':')[1])
 
