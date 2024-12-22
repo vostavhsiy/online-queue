@@ -14,26 +14,13 @@ export const serializeAppointmentsFromEvent = (
 			EventInput & { customer: Customer; event: Event }
 		> = appointments.map(appointment => {
 			const start = new Date(appointment.date)
-			console.log('start:', start, start.toISOString())
-			start.setHours(+appointment.duration.from.split(':')[0])
-			console.log(
-				'start hours:',
-				+appointment.duration.from.split(':')[0],
-				start,
-				start.toISOString()
-			)
-			start.setMinutes(+appointment.duration.from.split(':')[1])
-			console.log(
-				'start minutes:',
-				+appointment.duration.from.split(':')[1],
-				start,
-				start.toISOString()
-			)
-			console.log('start after:', start, start.toISOString())
+
+			start.setUTCHours(+appointment.duration.from.split(':')[0])
+			start.setUTCMinutes(+appointment.duration.from.split(':')[1])
 
 			const end = new Date(appointment.date)
-			end.setHours(+appointment.duration.to.split(':')[0])
-			end.setMinutes(+appointment.duration.to.split(':')[1])
+			end.setUTCHours(+appointment.duration.to.split(':')[0])
+			end.setUTCMinutes(+appointment.duration.to.split(':')[1])
 
 			const rrule =
 				appointment.weekDay != undefined
