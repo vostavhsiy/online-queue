@@ -25,7 +25,7 @@ export const serializeAppointmentsFromEvent = (
 			)
 
 			const end = new Date(appointment.date)
-			end.setUTCHours(
+			end.setHours(
 				+appointment.duration.to.split(':')[0],
 				+appointment.duration.to.split(':')[1],
 				0
