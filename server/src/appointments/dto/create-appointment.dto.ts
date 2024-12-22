@@ -3,7 +3,7 @@ import { CreateDurationDto } from '../../durations/dto/create-duration.dto';
 
 export class CreateAppointmentDto {
   @IsNotEmpty()
-  date: Date;
+  date: Date | string;
 
   @IsNotEmpty()
   eventId: string;
