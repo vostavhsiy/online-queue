@@ -1,6 +1,7 @@
 import { Customer } from '@/entities/customer/model'
 import { EventWithRelations } from '@/entities/event/model'
 import { EventInput } from '@fullcalendar/core'
+import moment from 'moment'
 import { AppointmentWithRelations } from '../model'
 
 export const serializeAppointmentsFromEvent = (
@@ -13,25 +14,29 @@ export const serializeAppointmentsFromEvent = (
 		const serializedAppointments: Array<
 			EventInput & { customer: Customer; event: Event }
 		> = appointments.map(appointment => {
-			const start = new Date(appointment.date)
-			console.log('start', start.toUTCString())
-			const startTimezone = -start.getTimezoneOffset()
-			console.log('start zone', startTimezone)
-			start.setUTCMinutes(
-				startTimezone > 0
-					? start.getUTCMinutes() + startTimezone
-					: start.getUTCMinutes() - startTimezone
-			)
-			console.log('start af minutes', start)
-			start.setUTCHours(
-				+appointment.duration.from.split(':')[0],
-				+appointment.duration.from.split(':')[1]
-			)
-			console.log('start af hourss', start)
-			if (startTimezone > 0) {
-				start.setMinutes(start.getMinutes() - startTimezone)
-			} else start.setMinutes(start.getMinutes() + startTimezone)
-			console.log('new start', start)
+			// const start = new Date(appointment.date)
+			// console.log('start', start.toUTCString())
+			// const startTimezone = -start.getTimezoneOffset()
+			// console.log('start zone', startTimezone)
+			// start.setUTCMinutes(
+			// 	startTimezone > 0
+			// 		? start.getUTCMinutes() + startTimezone
+			// 		: start.getUTCMinutes() - startTimezone
+			// )
+			// console.log('start af minutes', start)
+			// start.setUTCHours(
+			// 	+appointment.duration.from.split(':')[0],
+			// 	+appointment.duration.from.split(':')[1]
+			// )
+			// console.log('start af hourss', start)
+			// if (startTimezone > 0) {
+			// 	start.setMinutes(start.getMinutes() - startTimezone)
+			// } else start.setMinutes(start.getMinutes() + startTimezone)
+			// console.log('new start', start)
+
+			const start = moment(appointment.date)
+			start.set({ hours: 13 })
+			console.log('start', start.format())
 
 			const end = new Date(appointment.date)
 			const endTimezone = -end.getTimezoneOffset()
