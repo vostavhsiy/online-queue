@@ -14,15 +14,14 @@ export const serializeAppointmentsFromEvent = (
 			EventInput & { customer: Customer; event: Event }
 		> = appointments.map(appointment => {
 			const start = new Date(appointment.date)
-			const startCurrentDate = start.getDate()
-			const startCurrentMonth = start.getMonth()
-			const startCurrentYear = start.getFullYear()
+			console.log("start", start)
 
 			start.setHours(
 				+appointment.duration.from.split(':')[0],
 				+appointment.duration.from.split(':')[1],
 				0
 			)
+			console.log('new start', start)
 
 			const end = new Date(appointment.date)
 			end.setHours(
