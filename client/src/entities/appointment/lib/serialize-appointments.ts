@@ -1,5 +1,6 @@
 import { Customer } from '@/entities/customer/model'
 import { EventWithRelations } from '@/entities/event/model'
+import { setDateHours } from '@/shared/lib/utils'
 import { EventInput } from '@fullcalendar/core'
 import { AppointmentWithRelations } from '../model'
 
@@ -7,27 +8,16 @@ export const serializeAppointmentsFromEvent = (
 	events: EventWithRelations[]
 ) => {
 	try {
-		const myDate = new Date()
-		const timezoneOffset = myDate.getTimezoneOffset()
-		if (timezoneOffset > 0) {
-			myDate.setMinutes(24 * 60 - (timezoneOffset + 1))
-		} else {
-			myDate.setMinutes(-timezoneOffset) // Do not forget the negative sign !
-		}
-		myDate.setUTCHours(13)
-		console.log(myDate)
 		const appointments = events.reduce((acc, event) => {
 			return [...acc, ...event.appointments]
 		}, [] as AppointmentWithRelations[])
 		const serializedAppointments: Array<
 			EventInput & { customer: Customer; event: Event }
 		> = appointments.map(appointment => {
-			const start = new Date(
-				new Date(appointment.date).setHours(
-					+appointment.duration.from.split(':')[0],
-					+appointment.duration.from.split(':')[1],
-					0
-				)
+			const start = setDateHours(
+				new Date(appointment.date),
+				+appointment.duration.from.split(':')[0],
+				+appointment.duration.from.split(':')[1]
 			)
 			console.log('new start', start)
 
