@@ -20,7 +20,7 @@ const LogoutButton: FC<Props> = ({ isIcon }) => {
 		<Button
 			type='button'
 			size={isIcon ? 'icon' : 'default'}
-			variant={"outline"}
+			variant={'outline'}
 			disabled={isPending}
 			onClick={handleClick}
 		>
