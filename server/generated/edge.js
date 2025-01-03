@@ -32,12 +32,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.20.0
- * Query Engine version: 06fc58a368dc7be9fbbbe894adf8d445d208c284
+ * Prisma Client JS version: 5.22.0
+ * Query Engine version: 605197351a3c8bdd595af2d2a9bc3025bca48ea2
  */
 Prisma.prismaVersion = {
-  client: "5.20.0",
-  engine: "06fc58a368dc7be9fbbbe894adf8d445d208c284"
+  client: "5.22.0",
+  engine: "605197351a3c8bdd595af2d2a9bc3025bca48ea2"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -215,8 +215,8 @@ const config = {
     "schemaEnvPath": "../.env"
   },
   "relativePath": "../prisma",
-  "clientVersion": "5.20.0",
-  "engineVersion": "06fc58a368dc7be9fbbbe894adf8d445d208c284",
+  "clientVersion": "5.22.0",
+  "engineVersion": "605197351a3c8bdd595af2d2a9bc3025bca48ea2",
   "datasourceNames": [
     "db"
   ],
@@ -225,13 +225,13 @@ const config = {
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "fromEnvVar": null,
+        "value": "postgresql://postgres:postgres@localhost:5432/onlinequeue?schema=public"
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../generated\"\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Company {\n  id        String  @id @default(uuid())\n  email     String  @unique\n  name      String\n  password  String\n  events    Event[]\n  widget    Widget?\n  emailHtml Email?\n}\n\nmodel Event {\n  id           String        @id @default(uuid())\n  name         String\n  companyId    String\n  company      Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)\n  schedule     Schedule?\n  appointments Appointment[]\n}\n\nmodel Schedule {\n  id      String @id @default(uuid())\n  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)\n  eventId String @unique\n  times   Time[]\n}\n\nmodel Time {\n  id           String        @id @default(uuid())\n  weekDay      Int\n  times        Duration[]\n  scheduleId   String\n  schedule     Schedule      @relation(fields: [scheduleId], references: [id], onDelete: Cascade)\n  appointments Appointment[]\n}\n\nmodel Customer {\n  id            String      @id @default(uuid())\n  name          String\n  phone         String\n  email         String\n  appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)\n  appointmentId String      @unique\n}\n\nmodel Appointment {\n  id         String   @id @default(uuid())\n  date       DateTime\n  weekDay    Int?\n  timeId     String?\n  customerId String?\n  eventId    String\n  durationId String\n\n  event    Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)\n  duration Duration  @relation(fields: [durationId], references: [id], onDelete: Cascade)\n  time     Time?     @relation(fields: [timeId], references: [id], onDelete: Cascade)\n  customer Customer?\n}\n\nmodel Duration {\n  id           String        @id @default(uuid())\n  from         String\n  to           String\n  appointments Appointment[]\n  times        Time[]\n}\n\nmodel Widget {\n  id         String  @id @default(uuid())\n  companyId  String  @unique\n  company    Company @relation(fields: [companyId], references: [id], onDelete: Cascade)\n  customHtml String?\n}\n\nmodel Email {\n  id               String  @id @default(uuid())\n  companyId        String  @unique\n  company          Company @relation(fields: [companyId], references: [id], onDelete: Cascade)\n  makeCustomHtml   String?\n  unmakeCustomHtml String?\n}\n",
-  "inlineSchemaHash": "3b7207d38b98163267f853808b33abea710f9f518e05db3c9d3ecf18409d436e",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../generated\"\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = \"postgresql://postgres:postgres@localhost:5432/onlinequeue?schema=public\"\n}\n\nmodel Company {\n  id        String  @id @default(uuid())\n  email     String  @unique\n  name      String\n  password  String\n  events    Event[]\n  widget    Widget?\n  emailHtml Email?\n}\n\nmodel Event {\n  id           String        @id @default(uuid())\n  name         String\n  companyId    String\n  company      Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)\n  schedule     Schedule?\n  appointments Appointment[]\n}\n\nmodel Schedule {\n  id      String @id @default(uuid())\n  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)\n  eventId String @unique\n  times   Time[]\n}\n\nmodel Time {\n  id           String        @id @default(uuid())\n  weekDay      Int\n  times        Duration[]\n  scheduleId   String\n  schedule     Schedule      @relation(fields: [scheduleId], references: [id], onDelete: Cascade)\n  appointments Appointment[]\n}\n\nmodel Customer {\n  id            String      @id @default(uuid())\n  name          String\n  phone         String\n  email         String\n  appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)\n  appointmentId String      @unique\n}\n\nmodel Appointment {\n  id         String   @id @default(uuid())\n  date       DateTime\n  weekDay    Int?\n  timeId     String?\n  customerId String?\n  eventId    String\n  durationId String\n\n  event    Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)\n  duration Duration  @relation(fields: [durationId], references: [id], onDelete: Cascade)\n  time     Time?     @relation(fields: [timeId], references: [id], onDelete: Cascade)\n  customer Customer?\n}\n\nmodel Duration {\n  id           String        @id @default(uuid())\n  from         String\n  to           String\n  appointments Appointment[]\n  times        Time[]\n}\n\nmodel Widget {\n  id         String  @id @default(uuid())\n  companyId  String  @unique\n  company    Company @relation(fields: [companyId], references: [id], onDelete: Cascade)\n  customHtml String?\n}\n\nmodel Email {\n  id               String  @id @default(uuid())\n  companyId        String  @unique\n  company          Company @relation(fields: [companyId], references: [id], onDelete: Cascade)\n  makeCustomHtml   String?\n  unmakeCustomHtml String?\n}\n",
+  "inlineSchemaHash": "de0c279f80f2585ed94d669aad5822d18b09a7818f26e53db235d49bc8e4f432",
   "copyEngine": true
 }
 config.dirname = '/'
@@ -241,9 +241,7 @@ defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = undefined
 
 config.injectableEdgeEnv = () => ({
-  parsed: {
-    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
-  }
+  parsed: {}
 })
 
 if (typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined) {
