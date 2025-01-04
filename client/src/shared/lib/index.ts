@@ -1,5 +1,6 @@
 export * from './constants'
 export { useAppDispatch } from './hooks/use-app-dispatch'
 export { useAppSelector } from './hooks/use-app-selector'
+export { useAuth } from './hooks/use-auth'
 export { useIsMobile } from './hooks/use-mobile'
 export * from './utils'

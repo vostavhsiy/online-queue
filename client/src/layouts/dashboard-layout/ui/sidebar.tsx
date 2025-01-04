@@ -3,6 +3,7 @@
 import {
 	CalendarRange,
 	ChevronRight,
+	Code,
 	Mail,
 	MailCheck,
 	MailX,
@@ -46,6 +47,11 @@ const items = [
 		title: 'Виджет',
 		url: '/dashboard/widget',
 		icon: Square,
+	},
+	{
+		title: 'Встраивание',
+		url: '/dashboard/inject',
+		icon: Code,
 	},
 	{
 		title: 'Письма',
@@ -145,4 +151,3 @@ export const DashboardSidebar = () => {
 		</Sidebar>
 	)
 }
-

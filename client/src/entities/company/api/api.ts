@@ -46,6 +46,16 @@ export class CompanyApi {
 		return data
 	}
 
+	static async authFromClient(token: string) {
+		if (!token) throw 'No token!'
+		const { data } = await mainInstance.get<AuthResponse>('/auth', {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		})
+		return data
+	}
+
 	static async update(id: string, payload: CompanyUpdatePayload) {
 		const instanse = await getMainInstance()
 		const { data } = await instanse.patch<CompanyUpdateResponse>(

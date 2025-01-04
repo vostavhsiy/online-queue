@@ -1,5 +1,6 @@
 import '@/app/globals.scss'
 import { Providers } from '@/shared/config'
+import { Toaster } from '@/shared/ui'
 import type { Metadata } from 'next'
 import { Roboto_Condensed } from 'next/font/google'
 
@@ -24,6 +25,7 @@ export default async function RootLayout({
 				<Providers>
 					<div className='bg-background'>{children}</div>
 				</Providers>
+				<Toaster />
 			</body>
 		</html>
 	)

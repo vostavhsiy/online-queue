@@ -1,11 +1,20 @@
-import Link from 'next/link'
+import { Advantages } from './ui/advantages'
+import { Footer } from './ui/footer'
+import { BackForm } from './ui/form'
+import { Header } from './ui/header'
+import { Intro } from './ui/intro'
+import { Steps } from './ui/steps'
 
 const HomeScreen = () => {
 	return (
-		<div>
-			<h1>HomeScreen</h1>
-			<Link href={'/dashboard'}>dashboard</Link>
-		</div>
+		<main>
+			<Header />
+			<Intro />
+			<Steps />
+			<Advantages />
+			<BackForm />
+			<Footer />
+		</main>
 	)
 }
 
