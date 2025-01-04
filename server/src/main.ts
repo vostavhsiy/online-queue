@@ -8,7 +8,8 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors({
-    origin: '*',
+    origin: ['http://localhost'],
+    credentials: true,
   });
   app.useStaticAssets(path.join(__dirname, '..', 'assets'));
   app.setBaseViewsDir(path.join(__dirname, '..', 'views'));

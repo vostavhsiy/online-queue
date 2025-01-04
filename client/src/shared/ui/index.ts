@@ -1,5 +1,6 @@
 export { Button, type ButtonProps } from './button'
 export * from './checkbox'
+export * from './code'
 export * from './collapsible'
 export { Combobox } from './combobox'
 export * from './command'
@@ -34,6 +35,7 @@ export {
 } from './dropdown-menu'
 export { Input, type InputProps } from './input'
 export { LoadingScreen } from './loading'
+export * from './logo'
 export * from './popover'
 export * from './separator'
 export {
@@ -75,7 +77,9 @@ export {
 	useSidebar,
 } from './sidebar'
 export { Skeleton } from './skeleton'
+export * from './sonner'
 export * from './table'
+export * from './textarea'
 export {
 	Tooltip,
 	TooltipContent,

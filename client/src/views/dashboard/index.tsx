@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 
 const DashboardScreen = async () => {
 	const company = await auth()
-	if (!company) redirect('/api/auth/signin')
+	if (!company) redirect('/signin')
 	const appointments = serializeAppointmentsFromEvent(company.events) as any
 	if (!appointments) return <h2>Error...</h2>
 
