@@ -1,11 +1,16 @@
 import { useTheme } from 'next-themes'
+import { FC } from 'react'
 
-const Man = () => {
+interface Props {
+	isLight?: boolean
+}
+
+const Man: FC<Props> = ({ isLight }) => {
 	const { theme } = useTheme()
 
 	return (
 		<svg
-			fill={theme === 'dark' ? '#fff' : '#000'}
+			fill={isLight ? '#fff' : theme === 'dark' ? '#fff' : '#000'}
 			version='1.1'
 			id='Capa_1'
 			xmlns='http://www.w3.org/2000/svg'

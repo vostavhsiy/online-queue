@@ -2,20 +2,67 @@
 
 import { ContactsLinks } from '@/features/contacts-links'
 import { Button, Input, Textarea } from '@/shared/ui'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
 import { Mail, MapPin, Phone } from 'lucide-react'
+import { useRef, useState } from 'react'
 import { toast } from 'sonner'
 
 export const BackForm = () => {
+	const container = useRef<HTMLDivElement>(null)
+
+	const [pending, setPending] = useState(false)
+
+	useGSAP(
+		() => {
+			const tl = gsap.timeline()
+			tl.to('.title', {
+				opacity: 1,
+				x: 0,
+				scrollTrigger: {
+					trigger: '.title',
+				},
+			})
+				.to('.form', {
+					opacity: 1,
+					y: 0,
+					scrollTrigger: {
+						trigger: '.form',
+						toggleActions: 'play pause restart reset',
+					},
+				})
+				.to('.contacts', {
+					opacity: 1,
+					scrollTrigger: {
+						trigger: '.contacts',
+						toggleActions: 'play pause restart reset',
+					},
+				})
+		},
+		{ scope: container }
+	)
+
 	const handleSubmit = (data: FormData) => {
-		toast.success('Сообщение успешно отправлено', {
-			description: 'Спасибо за обратную связь',
-		})
+		setPending(true)
+		setTimeout(() => {
+			setPending(false)
+			toast.success('Сообщение успешно отправлено', {
+				description: 'Спасибо за обратную связь',
+			})
+		}, 1000)
 	}
 
 	return (
-		<div className='min-h-[80vh] container mx-auto flex items-center justify-center'>
+		<div
+			ref={container}
+			className='min-h-[80vh] container mx-auto flex items-center justify-center'
+		>
 			<div className={'py-20 w-4/5 mx-auto overflow-hidden'}>
-				<h3 className={'text-center mb-6 text-4xl font-semibold text-primary'}>
+				<h3
+					className={
+						'title opacity-0 transition-all duration-500 -translate-x-5 text-center mb-6 text-4xl font-semibold text-primary'
+					}
+				>
 					Контакты
 				</h3>
 				<div
@@ -25,7 +72,7 @@ export const BackForm = () => {
 				>
 					<div
 						className={
-							'relative overflow-hidden w-2/5 bg-gradient-to-r from-cyan-500 to-blue-500 dark:bg-primary px-6 py-8 rounded-xl  text-background'
+							'contacts opacity-0 transition-opacity duration-1000 delay-200 relative overflow-hidden w-2/5 bg-gradient-to-r from-cyan-500 to-blue-500 dark:bg-primary px-6 py-8 rounded-xl  text-background'
 						}
 					>
 						<h3 className={'mb-3 text-2xl font-semibold'}>
@@ -36,22 +83,22 @@ export const BackForm = () => {
 						</p>
 						<div className={'mb-32 flex flex-col gap-5 font-semibold'}>
 							<a
-								href={'tel:+77777777777'}
+								href={'tel:+79517735345'}
 								className={'flex items-center gap-4'}
 							>
 								<Phone />
-								<span>+7 777 777 77 77</span>
+								<span>+7 951 773 53 45</span>
 							</a>
 							<a
 								href={'mailto:ivtipt@sfedu.ru'}
 								className={'flex items-center gap-4'}
 							>
 								<Mail />
-								<span>ivtipt@sfedu.ru</span>
+								<span>onlinequeue@mail.ru</span>
 							</a>
 							<div className={'flex items-center gap-4'}>
 								<MapPin />
-								<span>г. Ростов-на-Дону, ул. Мильчакова, 10</span>
+								<span>г. Ростов-на-Дону, ул. Б. Садовая, 10</span>
 							</div>
 						</div>
 						<ContactsLinks />
@@ -66,7 +113,11 @@ export const BackForm = () => {
 							}
 						></div>
 					</div>
-					<div className={'w-3/5 px-16 pt-10'}>
+					<div
+						className={
+							'form transition-all duration-1000 delay-100 opacity-0 translate-y-8 w-3/5 px-16 pt-10'
+						}
+					>
 						<p className='text-center text-primary text-2xl mb-10'>
 							Обратная связь
 						</p>
@@ -82,7 +133,7 @@ export const BackForm = () => {
 								required
 							/>
 							<Textarea name='text' placeholder='Ваше послание' required />
-							<Button className='w-1/3' type='submit'>
+							<Button disabled={pending} className='w-1/3' type='submit'>
 								Отправить
 							</Button>
 						</form>

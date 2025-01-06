@@ -1,6 +1,6 @@
 'use client'
 import { ThemeButton } from '@/features/theme-button'
-import { useAuth } from '@/shared/lib'
+import { cn, useAuth } from '@/shared/lib'
 import { Logo } from '@/shared/ui'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
@@ -31,10 +31,16 @@ export const Header = () => {
 		>
 			<div
 				ref={inner}
-				className='container px-8 py-3 flex items-center justify-between'
+				className={cn('container px-8 py-2 flex items-center justify-between')}
 			>
 				<Logo />
 				<div className='flex items-center gap-3'>
+					<Link
+						href={'/privacy'}
+						className='text-sm mr-8 transition-all text-primary/60 hover:text-accent'
+					>
+						Политика конфиденциальности
+					</Link>
 					<ThemeButton />
 					<div>
 						{status === 'fullfield' && company ? (
