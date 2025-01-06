@@ -8,7 +8,7 @@ const NotFoundScreen = () => {
 			<Separator className='w-60 my-10' />
 			<div className='flex items-center gap-3'>
 				<Logo />
-				<Link href={'/'} className='text-xl'>На главную</Link>
+				<Link href={'/'} className='transition-all hover:text-accent text-xl'>На главную</Link>
 			</div>
 		</div>
 	)

@@ -70,6 +70,15 @@ const config: Config = {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)',
 			},
+			animation: {
+				fade: 'fade-in 1s ease-in-out 3s 1 both',
+			},
+			keyframes: {
+				'fade-in': {
+					from: { opacity: '0' },
+					to: { opacity: '1' },
+				},
+			},
 		},
 	},
 	plugins: [require('tailwindcss-animate')],

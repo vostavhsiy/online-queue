@@ -48,24 +48,39 @@ export const Steps = () => {
 	useGSAP(
 		() => {
 			const tl = gsap.timeline()
-			tl.to('.step', {
-				opacity: 1,
-				x: 0,
-				stagger: 0.4,
+			tl.to('.line', {
+				y: 0,
 				scrollTrigger: {
-					scrub: true,
-					trigger: stepsContainer.current,
-					end: 'bottom-=25%',
+					trigger: ".line",
+					start: 'top 100%',
+					end: "top 80%",
+					scrub: true
 				},
-			}).to('.point', {
-				opacity: 1,
-				scale: 3,
-				stagger: 1,
-				scrollTrigger: {
-					scrub: true,
-					trigger: stepsContainer.current,
-					end: 'bottom-=25%',
-				},
+			})
+			gsap.utils.toArray('.step').forEach((item, index) => {
+				tl.to(item as Element, {
+					opacity: 1,
+					x: 0,
+					duration: 3,
+					scrollTrigger: {
+						scrub: true,
+						trigger: item as Element,
+						start: 'top 80%',
+						end: 'top 20%',
+					},
+				})
+			})
+			gsap.utils.toArray('.point').forEach((item, index) => {
+				tl.to(item as Element, {
+					opacity: 1,
+					scale: 3,
+					scrollTrigger: {
+						scrub: true,
+						trigger: item as Element,
+						start: 'top 80%',
+						end: 'top 20%',
+					},
+				})
 			})
 		},
 		{ scope: container }
@@ -75,7 +90,7 @@ export const Steps = () => {
 		<div ref={container} className='container mx-auto'>
 			<div ref={inner} className='flex overflow-hidden'>
 				<div ref={timeline} className='w-[12.5%] flex justify-end'>
-					<div className='h-full w-2 bg-primary'></div>
+					<div className='line translate-y-[5%] h-full w-2 bg-primary rounded'></div>
 				</div>
 				<div className='w-[12.5%]'>
 					{Array(steps.length)

@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic'
 import { useEffect, useRef, useState } from 'react'
 
 const Man = dynamic(() => import('./man'), { ssr: false })
+const ScrollIcon = dynamic(() => import('./scroll-icon'), { ssr: false })
 
 gsap.registerPlugin(ScrollTrigger, TextPlugin)
 
@@ -24,7 +25,8 @@ export const Intro = () => {
 
 	const container = useRef<HTMLDivElement>(null)
 	const title = useRef<HTMLHeadingElement>(null)
-	const circle = useRef<HTMLHeadingElement>(null)
+	const circle = useRef<HTMLDivElement>(null)
+	const scrollIcon = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
 		setIsDarkTheme(theme === 'dark')
@@ -56,7 +58,6 @@ export const Intro = () => {
 				.to(title.current, {
 					background: isDarkTheme ? '#fff' : '#000',
 					color: isDarkTheme ? '#000' : '#fff',
-					//boxShadow: "0px 0px 0px 10px rgba(255,255,255,1)",
 				})
 				.to(container.current, {
 					background: isDarkTheme ? '#fff' : '#000',
@@ -64,6 +65,19 @@ export const Intro = () => {
 						scrub: 2,
 					},
 				})
+				.fromTo(
+					scrollIcon.current,
+					{ opacity: 1, y: 0 },
+					{
+						opacity: 0,
+						yPercent: 30,
+						scrollTrigger: {
+							trigger: container.current,
+							start: 'center-=30%',
+							scrub: 1,
+						},
+					}
+				)
 				.to('.ball', {
 					rotate: index => (8 - index) * 5 + 360 + 130,
 					stagger: 2,
@@ -110,6 +124,19 @@ export const Intro = () => {
 			></h1>
 			<div className='absolute bottom-3 left-8'>
 				<ContactsLinks />
+			</div>
+			<div
+				ref={scrollIcon}
+				className='absolute w-10 bottom-3 left-1/2 -translate-x-1/2 translate-y-5'
+			>
+				<div
+					className='opacity-0 animate-fade'
+					style={{ animationDelay: '3000ms' }}
+				>
+					<div className='animate-bounce delay-200'>
+						<ScrollIcon />
+					</div>
+				</div>
 			</div>
 		</div>
 	)

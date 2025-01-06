@@ -1,5 +1,6 @@
 import '@/app/globals.scss'
 import { Providers } from '@/shared/config'
+import { cn } from '@/shared/lib'
 import { Toaster } from '@/shared/ui'
 import type { Metadata } from 'next'
 import { Roboto_Condensed } from 'next/font/google'
@@ -21,10 +22,8 @@ export default async function RootLayout({
 }>) {
 	return (
 		<html lang='en' suppressHydrationWarning>
-			<body className={roboto_condensed.className}>
-				<Providers>
-					<div className='bg-background'>{children}</div>
-				</Providers>
+			<body className={cn('bg-background', roboto_condensed.className)}>
+				<Providers>{children}</Providers>
 				<Toaster />
 			</body>
 		</html>
