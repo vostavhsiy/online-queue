@@ -3,8 +3,7 @@
 import { cn } from '@/shared/lib'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import Image from 'next/image'
-import { useRef } from 'react'
+import { Fragment, useRef } from 'react'
 
 const steps = [
 	{
@@ -14,7 +13,7 @@ const steps = [
 	},
 	{
 		label: 'Добавьте ваши услуги',
-		text: 'В панели управления во вкладке "Мероприятия" создайте проводимые вами мероприятия оказание услуг, не забудте добавить к ним расписание!',
+		text: 'В панели управления во вкладке "Мероприятия" создайте проводимые вами мероприятия оказание услуг, не забудьте добавить к ним расписание!',
 		image: '/event.png',
 	},
 	{
@@ -42,19 +41,29 @@ const steps = [
 export const Steps = () => {
 	const container = useRef<HTMLDivElement>(null)
 	const inner = useRef<HTMLDivElement>(null)
-	const timeline = useRef<HTMLDivElement>(null)
-	const stepsContainer = useRef<HTMLDivElement>(null)
 
 	useGSAP(
 		() => {
+			const rootStyles = getComputedStyle(document.documentElement)
+			const hslValue = rootStyles.getPropertyValue('--accent').trim()
 			const tl = gsap.timeline()
-			tl.to('.line', {
+			tl.to('.title', {
 				y: 0,
+				opacity: 1,
 				scrollTrigger: {
-					trigger: ".line",
-					start: 'top 100%',
-					end: "top 80%",
-					scrub: true
+					trigger: container.current,
+					start: 'top-=40%',
+					toggleActions: 'play none none reset',
+				},
+			}).to('.line', {
+				height: '100%',
+				background: `hsl(${hslValue})`,
+				borderBottomLeftRadius: 0,
+				borderBottomRightRadius: 0,
+				scrollTrigger: {
+					trigger: '.line-container',
+					start: 'top-=50%',
+					scrub: true,
 				},
 			})
 			gsap.utils.toArray('.step').forEach((item, index) => {
@@ -65,8 +74,8 @@ export const Steps = () => {
 					scrollTrigger: {
 						scrub: true,
 						trigger: item as Element,
-						start: 'top 80%',
-						end: 'top 20%',
+						start: 'top 100%',
+						end: 'top 50%',
 					},
 				})
 			})
@@ -87,48 +96,47 @@ export const Steps = () => {
 	)
 
 	return (
-		<div ref={container} className='container mx-auto'>
-			<div ref={inner} className='flex overflow-hidden'>
-				<div ref={timeline} className='w-[12.5%] flex justify-end'>
-					<div className='line translate-y-[5%] h-full w-2 bg-primary rounded'></div>
+		<div ref={container} className='container px-8 mx-auto'>
+			<p className='title transition-all opacity-0 translate-y-20 text-center text-3xl mb-16'>
+				Начните использовать сервис за 6 простых шагов
+			</p>
+			<div ref={inner} className='relative py-40 pt-28 flex gap-20'>
+				<div className='line-container absolute top-0 left-1/2 -translate-x-1/2 w-2 h-full'>
+					<div className='line w-full bg-primary h-0 rounded-lg'></div>
 				</div>
-				<div className='w-[12.5%]'>
-					{Array(steps.length)
-						.fill(0)
-						.map((_, index) => {
-							return (
-								<div key={index} className='h-screen flex items-center'>
-									<div className='h-1/2'>
-										<span className='flex w-8 aspect-square rounded-full justify-center items-center -translate-x-1/2 point bg-primary text-background scale-0'>
-											{index + 1}
-										</span>
+				<div className='w-1/2 flex flex-col items-end'>
+					{steps.slice(0, steps.length / 2).map((step, index) => {
+						return (
+							<Fragment key={step.label}>
+								<div
+									className={cn('step opacity-0 -translate-x-5 h-32')}
+									key={step.label}
+								>
+									<div className='w-fit p-5 rounded border border-primary'>
+										<p className='text-2xl mb-5'>{step.label}</p>
+										<p className='text-base'>{step.text}</p>
 									</div>
 								</div>
-							)
-						})}
+								<div className='h-36'></div>
+							</Fragment>
+						)
+					})}
 				</div>
-				<div ref={stepsContainer} className='w-3/4'>
-					{steps.map((step, index) => {
+				<div className='w-1/2 mt-32 flex flex-col items-start'>
+					{steps.slice(steps.length / 2).map((step, index) => {
 						return (
-							<div
-								className={cn(
-									'step h-screen opacity-0 translate-x-1/2 flex items-center justify-start gap-12',
-									index % 2 == 1 && 'flex-row-reverse justify-end'
-								)}
-								key={step.label}
-							>
-								<div className='p-5 w-1/2 h-1/2 rounded border border-primary'>
-									<p className='text-3xl mb-5'>{step.label}</p>
-									<p className='text-lg'>{step.text}</p>
+							<Fragment key={step.label}>
+								{index > 0 && <div className='h-36'></div>}
+								<div
+									className={cn('step opacity-0 translate-x-5 h-32')}
+									key={step.label}
+								>
+									<div className='w-fit p-5 rounded border border-primary'>
+										<p className='text-2xl mb-5'>{step.label}</p>
+										<p className='text-base'>{step.text}</p>
+									</div>
 								</div>
-								<Image
-									className='w-1/3 border rounded'
-									src={step.image}
-									alt='step'
-									width={500}
-									height={500}
-								/>
-							</div>
+							</Fragment>
 						)
 					})}
 				</div>

@@ -14,7 +14,7 @@ const Providers: FC<Props> = ({ children }) => {
 	return (
 		<Provider store={store}>
 			<SessionProvider>
-				<ThemeProvider attribute='class' defaultTheme='light' enableSystem>
+				<ThemeProvider attribute='class' defaultTheme='light'>
 					{children}
 				</ThemeProvider>
 			</SessionProvider>

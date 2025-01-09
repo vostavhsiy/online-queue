@@ -30,6 +30,15 @@ export const Advantages = () => {
 
 	useGSAP(
 		() => {
+			gsap.to('.title', {
+				translateX: '-50%',
+				opacity: 1,
+				scrollTrigger: {
+					trigger: container.current,
+					start: 'top-=40%',
+					toggleActions: 'play none none reset',
+				},
+			})
 			const tl = gsap.timeline({
 				scrollTrigger: {
 					trigger: inner.current,
@@ -43,7 +52,7 @@ export const Advantages = () => {
 				duration: 10,
 			}).to('.line', {
 				width: '100%',
-				duration: 3
+				duration: 3,
 			})
 		},
 		{ scope: container }
@@ -55,13 +64,15 @@ export const Advantages = () => {
 				ref={inner}
 				className='relative bg-accent h-screen flex items-center overflow-hidden'
 			>
-				<p className='absolute top-32 left-1/2 -translate-x-1/2 text-3xl text-background'>Почему вы должны использовать онлайн-записи</p>
-				<div className='line absolute top-1/2 left-0 -translate-y-1/2 h-2 bg-background w-1/4'></div>
+				<p className='title absolute top-32 left-1/2 -translate-x-10 text-3xl text-background opacity-0'>
+					Почему вы должны использовать онлайн-записи
+				</p>
+				<div className='line rounded-lg absolute top-1/2 left-0 -translate-y-1/2 h-2 bg-background w-1/4'></div>
 				<div ref={itemsContainer} className='px-12 flex w-max gap-20'>
 					{advantages.map(adv => {
 						return (
 							<div
-								className='w-[40vw] px-8 py-5 bg-background rounded'
+								className='w-[40vw] min-h-60 px-8 py-5 bg-background rounded'
 								key={adv.title}
 							>
 								<p className='text-3xl'>{adv.title}</p>

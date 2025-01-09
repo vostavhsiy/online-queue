@@ -30,9 +30,6 @@ const ThemeButton = () => {
 				<DropdownMenuItem onClick={() => setTheme('dark')}>
 					Темная
 				</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => setTheme('system')}>
-					Системная
-				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	)
