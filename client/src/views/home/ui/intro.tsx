@@ -73,7 +73,8 @@ export const Intro = () => {
 						yPercent: 30,
 						scrollTrigger: {
 							trigger: container.current,
-							start: 'center-=30%',
+							start: 'top+=10%',
+							end: 'bottom-=40%',
 							scrub: 1,
 						},
 					}
