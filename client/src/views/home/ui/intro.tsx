@@ -65,6 +65,12 @@ export const Intro = () => {
 						scrub: 2,
 					},
 				})
+				.to(circle.current, {
+					yPercent: -15,
+					scrollTrigger: {
+						scrub: true,
+					},
+				})
 				.fromTo(
 					scrollIcon.current,
 					{ opacity: 1, y: 0 },

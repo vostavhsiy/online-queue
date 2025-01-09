@@ -49,7 +49,7 @@ export const About = () => {
 					scrollTrigger: {
 						scrub: true,
 						trigger: item as Element,
-						start: 'top 80%',
+						start: 'top 70%',
 						end: 'top 60%',
 					},
 				})
@@ -111,7 +111,7 @@ export const About = () => {
 	return (
 		<div
 			ref={container}
-			className='h-screen py-5 flex gap-5 justify-between items-center mx-auto w-3/4'
+			className='container px-8 py-40 flex gap-5 justify-between items-center mx-auto w-3/4'
 		>
 			<div className='w-1/2'>
 				<h2 className='opacity-0 title text-2xl font-semibold mb-4'>
@@ -161,7 +161,7 @@ export const About = () => {
 			</div>
 			<div
 				ref={itemsContainer}
-				className='w-2/5 h-1/2 overflow-hidden opacity-0 duration-500'
+				className='w-2/5 h-96 overflow-hidden opacity-0 duration-500'
 				style={{
 					maskImage:
 						'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
