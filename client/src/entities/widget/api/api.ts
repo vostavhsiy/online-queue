@@ -1,7 +1,7 @@
 import { getMainInstance } from '@/shared/api'
 import { Widget } from '../model'
 
-export type GetWidgetResponse = string
+export type GetWidgetResponse = { html: string; url: string }
 
 export interface CreateWidgetPayload extends Omit<Widget, 'id'> {}
 export interface CreateWidgetResponse extends Widget {}

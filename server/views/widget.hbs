@@ -1,15 +1,15 @@
-<div class='online-queue-widget'>
-  <div
-    style='background: rgb(255, 255, 255);'
-    class='online-queue-widget__inner'
-  >
+<div style='background: #f5f5f5;' class='online-queue-widget'>
+  <div style='background: #fff;' class='online-queue-widget__inner'>
     <div class='online-queue-widget__company'>
       <p class='online-queue-widget__title'>Запишитесь на прием в {{name}}.</p>
       <p class='online-queue-widget__text'>Связаться с нами можно по почте
         <span style='text-decoration: underline;'>{{email}}</span></p>
     </div>
     <div class='online-queue-widget__select'>
-      <details class='online-queue-widget__select__inner'>
+      <details
+        class='online-queue-widget__select__inner'
+        id='online-queue-widget__details'
+      >
         <summary class='online-queue-widget__select__radios'>
           <input
             id='online-queue-widget__select__input'
@@ -42,10 +42,21 @@
       method='post'
     >
       <div id='info'></div>
-      <input type='email' placeholder='email' name='email' required />
-      <input type='text' placeholder='name' name='name' required />
-      <input type='tel' placeholder='phone' name='phone' required />
+      <label class='online-queue-form__label'>
+        <span>Ваш почтовый ящик</span>
+        <input type='email' placeholder='Email' name='email' required />
+      </label>
+      <label class='online-queue-form__label'>
+        <span>Ваше имя</span>
+        <input type='text' placeholder='Имя' name='name' required />
+      </label>
+      <label class='online-queue-form__label'>
+        <span>Ваш номер телефона</span>
+        <input type='tel' placeholder='Телефон' name='phone' required />
+      </label>
       <input id='appointmentId' type='text' name='appointmentId' hidden />
+      <p class='online-queue-form__text'>Заполните все поля. Сообщение о записи
+        будет отправлено на ваш почтовый ящик.</p>
       <button type='submit'>Записаться</button>
       <button type='button' class='close'>Назад</button>
     </form>

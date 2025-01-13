@@ -18,15 +18,33 @@ class Widget {
       console.log('The specified block id="' + this.rootId + '" is missing');
       return;
     }
+    root.innerHTML = `
+      <div
+        style='background: rgb(255, 255, 255); 
+          max-width: 800px;
+          min-height: 650px;
+          position: relative;
+          overflow: hidden;
+          padding: 30px;
+          border-radius: 10px;
+          border: 2px rgb(205, 205, 205) solid;
+          display: flex;
+          align-items: center;
+          justify-content: center;'
+        class='online-queue-widget__inner'
+      >
+          <span>Загрузка...</span>
+      </div>
+    `;
     try {
       const XHR =
         'onload' in new XMLHttpRequest() ? XMLHttpRequest : XDomainRequest;
       const xhr = new XHR();
       xhr.open('GET', this.url_widget, true);
       xhr.onload = (event) => {
-        const target = event.currentTarget;
-        if (target.response) {
-          root.innerHTML = target.response;
+        const target = event?.currentTarget?.response;
+        if (target) {
+          root.innerHTML = JSON.parse(target).html;
           this.addStyle();
           this.addScripts();
           fetch(this.url_widget + '/appointments')
@@ -47,12 +65,14 @@ class Widget {
                     id: eventInfo.event.id,
                     title: eventInfo.event.title,
                     date: new Date(eventInfo.event.start).toLocaleDateString(),
-                    time:
-                      new Date(eventInfo.event.start)
+                    time: {
+                      from: new Date(eventInfo.event.start)
                         .toTimeString()
-                        .slice(0, 5) +
-                      ':' +
-                      new Date(eventInfo.event.end).toTimeString().slice(0, 5),
+                        .slice(0, 5),
+                      to: new Date(eventInfo.event.end)
+                        .toTimeString()
+                        .slice(0, 5),
+                    },
                   };
                   this.openForm(info);
                   this.currentEvent = info;
@@ -163,30 +183,46 @@ class Widget {
   }
 
   addScripts(locale = 'ru') {
-    const script = document.createElement('script');
-    script.src =
-      'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js';
-    script.setAttribute('defer', true);
-    document.head.appendChild(script);
-    const localeScript = document.createElement('script');
-    localeScript.src = `https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/locales/${locale}.global.js`;
-    localeScript.setAttribute('defer', true);
-    document.head.appendChild(localeScript);
+    try {
+      const root = document.getElementById('online-queue-calendar');
+      root.innerHTML = '';
+      const script = document.createElement('script');
+      script.src = 'http://localhost:3000/js/full-calendar.js';
+      script.setAttribute('defer', true);
+      document.head.appendChild(script);
+      const localeScript = document.createElement('script');
+      localeScript.src = `http://localhost:3000/js/ru.global.js`;
+      localeScript.setAttribute('defer', true);
+      document.head.appendChild(localeScript);
+    } catch (error) {
+      console.log(error);
+      const root = document.getElementById('online-queue-calendar');
+      const innerRoot = document.createElement('div');
+      innerRoot.style.height = '100%';
+      innerRoot.style.display = 'flex';
+      innerRoot.style.alignItems = 'center';
+      innerRoot.style.justifyContent = 'center';
+      innerRoot.innerHTML = 'Загрузка...';
+      root.appendChild(div);
+      this.addScripts();
+    }
   }
 
   openForm(event) {
     const form = document?.getElementById('online-queue-form');
     if (!form) return;
+    const details = document.getElementById('online-queue-widget__details');
+    details.open = false;
     const info = document.querySelector('#online-queue-form #info');
-    const title = document.createElement('span');
-    title.innerText = event.title;
-    const date = document.createElement('span');
-    date.innerText = event.date;
-    const time = document.createElement('span');
-    time.innerText = event.time;
-    info.appendChild(title);
-    info.appendChild(date);
-    info.appendChild(time);
+    info.innerHTML = `
+      <div class="info-inner">
+        <p class="title">${event.title}</p>
+        <div class="info-time">
+          <span>${event.date}</span>
+          <span>с ${event.time.from} до ${event.time.to}</span>
+        </div>
+      </div>
+    `;
     document.querySelector('#online-queue-form #appointmentId').value =
       event.id;
     form.classList.remove('hidden');

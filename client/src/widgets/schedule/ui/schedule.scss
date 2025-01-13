@@ -26,6 +26,10 @@
 	@apply bg-secondary #{!important};
 }
 
+.online-queue-widget .fc-theme-standard th {
+	background-color: hsl(240 4.8% 95.9%) !important;
+}
+
 .fc .fc-highlight {
 	@apply bg-black/5;
 }
@@ -34,6 +38,12 @@
 	@apply transition-all cursor-pointer;
 	&:hover {
 		@apply bg-secondary;
+	}
+}
+
+.online-queue-widget .fc .fc-daygrid-day {
+	&:hover {
+		background-color: hsl(240 4.8% 95.9%) !important;
 	}
 }
 
@@ -51,6 +61,11 @@
 .fc .fc-timegrid-col.fc-day-today {
 	@apply bg-secondary;
 }
+
+.online-queue-widget .fc .fc-timegrid-col.fc-day-today {
+	background-color: hsl(240 4.8% 95.9%) !important;
+}
+
 .fc .fc-daygrid-day.fc-day-today {
 	@apply bg-red-200	 font-semibold;
 	&:hover {

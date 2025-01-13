@@ -20,6 +20,7 @@ import { SchedulesModule } from './schedules/schedules.module';
 import { TimesModule } from './times/times.module';
 import { WidgetsModule } from './widgets/widgets.module';
 import { DbService } from './db/db.service'
+import { LibModule } from './lib/lib.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { DbService } from './db/db.service'
     MailModule,
     WidgetsModule,
     EmailsModule,
+    LibModule,
   ],
   controllers: [AppController],
   providers: [

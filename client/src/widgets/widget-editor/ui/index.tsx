@@ -74,17 +74,17 @@ const WidgetEditor: FC<Props> = ({ widgetHtml, widgetId }) => {
 	const openForm = () => {
 		if (formButton.current) formButton.current.disabled = true
 		const form = document?.getElementById('online-queue-form')
-		if (!form) return
 		const info = document.querySelector('#online-queue-form #info')
-		const title = document.createElement('span')
-		title.innerText = 'Название мероприятия'
-		const date = document.createElement('span')
-		date.innerText = '21.12.2024'
-		const time = document.createElement('span')
-		time.innerText = '14:00-15:00'
-		info?.appendChild(title)
-		info?.appendChild(date)
-		info?.appendChild(time)
+		if (!form || !info) return
+		info.innerHTML = `
+      <div class="info-inner">
+        <p class="title">Название мероприятия</p>
+        <div class="info-time">
+          <span>21.12.2024</span>
+          <span>с 14:00 до 15:00</span>
+        </div>
+      </div>
+    `
 		form.classList.remove('unactive')
 		form.classList.add('active')
 		setTimeout(() => {
@@ -113,7 +113,7 @@ const WidgetEditor: FC<Props> = ({ widgetHtml, widgetId }) => {
 	}, [formMode])
 
 	return (
-		<div className='flex flex-1 justify-between gap-8'>
+		<div className='flex flex-1 justify-between gap-8 text-black'>
 			<div className='w-1/2'>
 				<p className='mb-3 text-lg'>Редактирование виджета</p>
 				<div className='bg-secondary h-[400px] rounded-[10px]'>
