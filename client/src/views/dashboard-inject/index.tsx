@@ -9,7 +9,7 @@ const DashboardInjectScreen = async () => {
 
 	return (
 		<>
-			<p className='text-2xl mb-3'>Встранивание виджета</p>
+			<p className='text-2xl mt-5 mb-3'>Встранивание виджета</p>
 			<div className='flex flex-col gap-3'>
 				<p>
 					Добавьте div с id <b>queue-widget</b> туда, где вы хотите разместить

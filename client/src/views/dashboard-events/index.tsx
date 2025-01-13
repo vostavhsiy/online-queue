@@ -10,12 +10,12 @@ const DashboardEvents = async () => {
 	const events = await getAllEvents()
 
 	return (
-		<div className='flex flex-col gap-4'>
+		<div className='mt-5 flex flex-col gap-4'>
 			<p className='text-3xl'>Ваши мероприятия</p>
 			<Button asChild className='max-w-fit'>
 				<Link href={'/dashboard/events/create'}>
 					<Plus />
-					Добавить мероприятие	
+					Добавить мероприятие
 				</Link>
 			</Button>
 			{events?.map(event => {

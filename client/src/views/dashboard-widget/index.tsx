@@ -13,7 +13,7 @@ const DashboardWidgetScreen = async () => {
 
 	return (
 		<div>
-			<p className='text-3xl mb-4'>Настройки виджета</p>
+			<p className='text-3xl mt-5 mb-4'>Настройки виджета</p>
 			<ul className='flex flex-col gap-3 mb-8 list-disc ml-4'>
 				<li>
 					Блок <strong>Календарь</strong> (

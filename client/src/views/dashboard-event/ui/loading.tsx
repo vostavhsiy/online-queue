@@ -4,7 +4,7 @@ export const DashboardEventScreenLoading = () => {
 	return (
 		<div className='h-full flex flex-col'>
 			<div className='mb-10 flex items-start gap-3 justify-between'>
-				<div className='flex items-end gap-3'>
+				<div className='mt-5 flex items-end gap-3'>
 					<Skeleton className='w-[200px] h-10' />
 					<Skeleton className='w-[80px] h-7' />
 				</div>

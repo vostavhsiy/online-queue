@@ -21,7 +21,7 @@ const DashboardEvent: NextPage<Props> = async props => {
 	return (
 		<div className='h-full flex flex-col'>
 			<div className='mb-10 flex items-start gap-3 justify-between'>
-				<div className='flex items-end gap-3 text-4xl font-semibold transition-all hover:text-primary/80'>
+				<div className='flex mt-5  items-end gap-3 text-4xl font-semibold transition-all hover:text-primary/80'>
 					<div className='max-w-[60%]'>{event.name}</div>
 					<span className='font-normal text-lg text-primary/70'>
 						Мероприятие

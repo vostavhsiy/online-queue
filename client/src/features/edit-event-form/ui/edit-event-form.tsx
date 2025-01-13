@@ -126,7 +126,7 @@ const EditEventForm: FC<Props> = ({ event }) => {
 	return (
 		<div className='h-full'>
 			<form action={handleSubmit} className='flex flex-col gap-4 h-full'>
-				<p className='text-2xl font-semibold'>Редактирование события</p>
+				<p className='text-2xl mt-5 font-semibold'>Редактирование события</p>
 				<label className='flex flex-col gap-2'>
 					<span className='text-sm'>Введите новое название события:</span>
 					<Input
