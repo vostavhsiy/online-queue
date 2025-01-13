@@ -1,7 +1,7 @@
 'use client'
 
 import { updateWidget } from '@/entities/widget/api'
-import { Button } from '@/shared/ui'
+import { Button, useSidebar } from '@/shared/ui'
 import { Calendar } from '@fullcalendar/core'
 import ruLocale from '@fullcalendar/core/locales/ru'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -17,6 +17,10 @@ interface Props {
 const WidgetEditor: FC<Props> = ({ widgetHtml, widgetId }) => {
 	const editorRef = useRef<any>(null)
 
+	const { state: sidebarState } = useSidebar()
+
+	const [calendar, setCalendar] = useState<Calendar | null>(null)
+
 	const [previewHtml, setPreviewHtml] = useState(widgetHtml)
 	const previewRef = useRef<HTMLDivElement>(null)
 
@@ -25,11 +29,29 @@ const WidgetEditor: FC<Props> = ({ widgetHtml, widgetId }) => {
 	const formButton = useRef<HTMLButtonElement>(null)
 	const [formMode, setFormMode] = useState(false)
 
+	const resizeCalendar = () => {
+		const wrapper = previewRef.current
+		if (wrapper) {
+			wrapper.style.opacity = '0'
+		}
+		setTimeout(() => {
+			if (wrapper) {
+				wrapper.style.opacity = '1'
+			}
+			calendar?.updateSize()
+		}, 200)
+	}
+
+	useEffect(() => {
+		resizeCalendar()
+	}, [sidebarState])
+
 	const preview = () => {
 		const html = editorRef.current?.getContent()
 		if (!html) return
 		setFormMode(false)
 		setPreviewHtml(html)
+		editorRef.current?.resize()
 	}
 
 	const save = () => {
@@ -67,6 +89,7 @@ const WidgetEditor: FC<Props> = ({ widgetHtml, widgetId }) => {
 				initialView: 'dayGridMonth',
 				locale: ruLocale,
 			})
+			setCalendar(calendar)
 			calendar.render()
 		}
 	}, [previewHtml])

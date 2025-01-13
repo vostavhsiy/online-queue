@@ -1,21 +1,36 @@
-import { serializeAppointmentsFromEvent } from '@/entities/appointment/lib'
+import { sortAppointments } from '@/entities/appointment/lib'
+import { AppointmentWithRelations } from '@/entities/appointment/model'
+import { AppointmentsList } from '@/entities/appointment/ui'
 import { auth } from '@/entities/company/api'
 import { getAllEvents } from '@/entities/event/api'
-import Schedule from '@/widgets/schedule'
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 const DashboardScreen = async () => {
 	const company = await auth()
 	if (!company) redirect('/signin')
-	const appointments = serializeAppointmentsFromEvent(company.events) as any
-	if (!appointments) return <h2>Error...</h2>
-
-	const events = (await getAllEvents()) || []
+	const appointments = sortAppointments(
+		company.events.reduce(
+			(acc, app) => [...acc, ...app.appointments],
+			[] as AppointmentWithRelations[]
+		)
+	)
+	const events = await getAllEvents()
+	if (!appointments || !events) redirect('/')
 
 	return (
 		<>
-			<p className='text-2xl mb-3'>Расписание</p>
-			<Schedule appointments={appointments} events={events} />
+			<p className='text-3xl mt-5 mb-8'>Ближайшие записи</p>
+			{appointments.length ? (
+				<AppointmentsList appointments={appointments} events={events} />
+			) : (
+				<div className='flex items-center gap-3'>
+					<p className='text-destructive'>Записей нет!</p>
+					<Link className='underline' href='/schedule'>
+						Добавьте новую запись!
+					</Link>
+				</div>
+			)}
 		</>
 	)
 }

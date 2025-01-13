@@ -1,3 +1,3 @@
-import { DashboardScreenLoading } from '@/views/dashboard/ui'
+import { LoadingScreen } from '@/shared/ui'
 
-export default DashboardScreenLoading
+export default LoadingScreen

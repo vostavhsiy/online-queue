@@ -113,6 +113,7 @@ const CreateEventForm = () => {
 	return (
 		<div className='h-full'>
 			<form action={handleSubmit} className='flex flex-col gap-4 h-full'>
+				<p className='text-3xl mt-5'>Создание мероприятия</p>
 				<label className='flex flex-col gap-2'>
 					<span className='text-sm'>Введите название события:</span>
 					<Input name='eventTitle' placeholder='Название события' required />

@@ -24,11 +24,10 @@ import {
 import ruLocale from '@fullcalendar/core/locales/ru'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import listPlugin from '@fullcalendar/list'
 import FullCalendar from '@fullcalendar/react'
 import rrulePlugin from '@fullcalendar/rrule'
 import timeGridPlugin from '@fullcalendar/timegrid'
-import { FC, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 
 type ScheduleAppointment = EventInput & { customer: Customer; event: Event }
 
@@ -53,10 +52,6 @@ const Schedule: FC<Props> = ({ appointments, events }) => {
 
 	const calendarRef = useRef<FullCalendar>(null)
 	const calendarWrapperRef = useRef<HTMLDivElement>(null)
-
-	useLayoutEffect(() => {
-		calendarRef.current?.getApi().changeView('listWeek')
-	}, [])
 
 	const resizeCalendar = () => {
 		const wrapper = calendarWrapperRef.current
@@ -176,7 +171,6 @@ const Schedule: FC<Props> = ({ appointments, events }) => {
 							dayGridPlugin,
 							timeGridPlugin,
 							interactionPlugin,
-							listPlugin,
 							rrulePlugin,
 						]}
 						buttonText={{
@@ -184,12 +178,11 @@ const Schedule: FC<Props> = ({ appointments, events }) => {
 							week: 'Неделя',
 							day: 'День',
 							month: 'Месяц',
-							listWeek: 'Список',
 						}}
 						headerToolbar={{
 							left: 'prev,next today',
 							center: 'title',
-							right: 'listWeek,dayGridMonth,timeGridWeek,timeGridDay',
+							right: 'dayGridMonth,timeGridWeek,timeGridDay',
 						}}
 						locale={ruLocale}
 						nowIndicator={true}

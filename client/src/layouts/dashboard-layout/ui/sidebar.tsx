@@ -4,6 +4,7 @@ import {
 	CalendarRange,
 	ChevronRight,
 	Code,
+	Home,
 	Mail,
 	MailCheck,
 	MailX,
@@ -34,8 +35,13 @@ import { usePathname } from 'next/navigation'
 // Menu items.
 const items = [
 	{
-		title: 'Расписание',
+		title: 'Панель',
 		url: '/dashboard',
+		icon: Home,
+	},
+	{
+		title: 'Расписание',
+		url: '/dashboard/schedule',
 		icon: CalendarRange,
 	},
 	{

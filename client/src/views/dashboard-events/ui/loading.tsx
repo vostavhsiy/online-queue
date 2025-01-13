@@ -3,7 +3,7 @@ import { Skeleton } from '@/shared/ui'
 export const DashboardEventsScreenLoading = () => {
 	return (
 		<div className='flex flex-col gap-4'>
-			<Skeleton className='w-[200px] h-9' />
+			<Skeleton className='w-[200px] h-9 mt-5' />
 			<Skeleton className='w-[180px] h-9' />
 			{Array(3)
 				.fill(0)

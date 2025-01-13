@@ -8,7 +8,7 @@ const DashboardSettingsScreen = async () => {
 
 	return (
 		<div>
-			<p className='text-3xl mb-3'>Настройки</p>
+			<p className='text-3xl mt-5 mb-3'>Настройки</p>
 			<CompanySettingsForm company={company} />
 		</div>
 	)
