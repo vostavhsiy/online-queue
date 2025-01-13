@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import * as hbs from 'express-handlebars';
 import { Prisma } from 'generated';
+import { LibService } from 'src/lib/lib.service';
 import { DbService } from './../db/db.service';
 import { CreateWidgetDto } from './dto/create-widget.dto';
 import { UpdateWidgetDto } from './dto/update-widget.dto';
@@ -13,7 +14,10 @@ import { UpdateWidgetDto } from './dto/update-widget.dto';
 export class WidgetsService {
   engine = hbs.create();
 
-  constructor(private dbService: DbService) {}
+  constructor(
+    private dbService: DbService,
+    private libService: LibService,
+  ) {}
 
   async findOne(id: string) {
     try {
@@ -52,7 +56,8 @@ export class WidgetsService {
         return html;
       }
       const html = await this.engine.render('views/widget.hbs', renderData);
-      return html;
+      const url = this.libService.getServerAddress();
+      return { html, url };
     } catch (error) {
       console.log(error);
       throw new NotFoundException({}, { cause: error });

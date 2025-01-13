@@ -1,14 +1,15 @@
 import { auth } from '@/entities/company/api'
 import { getWidget } from '@/entities/widget/api/actions'
 import { WidgetEditor } from '@/widgets/widget-editor'
+import { WidgetVarsTable } from '@/widgets/widget-vars-table'
 import { redirect } from 'next/navigation'
 
 const DashboardWidgetScreen = async () => {
 	const company = await auth()
 	if (!company?.widget) redirect('/dashboard')
 
-	const widgetHtml = await getWidget(company.widget.id)
-	if (!widgetHtml) redirect('/dashboard')
+	const widget = await getWidget(company.widget.id)
+	if (!widget) redirect('/dashboard')
 
 	return (
 		<div>
@@ -35,7 +36,10 @@ const DashboardWidgetScreen = async () => {
 					главное - <strong>не трогать элементы summary и ul (список)! </strong>
 				</li>
 			</ul>
-			<WidgetEditor widgetId={company.widget.id} widgetHtml={widgetHtml} />
+			<WidgetEditor widgetId={company.widget.id} widgetHtml={widget.html} />
+			<div className='mt-10'>
+				<WidgetVarsTable />
+			</div>
 		</div>
 	)
 }

@@ -2,15 +2,24 @@
 	font-family: RobotoCondensed;
 	src: url('/fonts/RobotoCondensed-Regular.ttf');
 }
-.online-queue-widget,
-.online-queue-widget * {
-	font-family: RobotoCondensed;
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
-}
 
 .widget-preview {
+	.online-queue-widget,
+	.online-queue-widget * {
+		font-family: RobotoCondensed;
+		box-sizing: border-box;
+		padding: 0;
+		margin: 0;
+	}
+
+	.online-queue-widget {
+		max-width: 800px;
+		min-height: 650px;
+		overflow: hidden;
+		padding: 30px;
+		border-radius: 10px;
+	}
+
 	.fc-scroller::-webkit-scrollbar {
 		background: transparent !important;
 		width: 5px !important;
@@ -63,8 +72,7 @@
 		overflow: hidden !important;
 		padding: 30px !important;
 		border-radius: 10px !important;
-		border: 2px rgb(205, 205, 205) solid !important;
-		box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1) !important;
+		border: 1px solid #c3c3c3 !important;
 		display: flex !important;
 		flex-direction: column !important;
 		gap: 10px !important;
@@ -94,16 +102,65 @@
 		width: 100% !important;
 		height: 100% !important;
 		padding: 20px !important;
-		background: rgba(255, 255, 255, 0.8) !important;
+		background: rgba(255, 255, 255) !important;
+		border-radius: 10px !important;
 		backdrop-filter: blur(5px) !important;
 		opacity: 0;
 		visibility: hidden;
+		overflow: auto;
+	}
+
+	#online-queue-form::-webkit-scrollbar {
+		background: transparent;
+		width: 5px;
+	}
+
+	#online-queue-form::-webkit-scrollbar-thumb {
+		background: rgb(227, 227, 227);
+		border-radius: 10px;
+	}
+
+	#online-queue-form input {
+		background-color: #fff;
+		padding: 15px 20px;
+		border-radius: 5px;
+		outline: 0;
+		border: 1px solid #727272;
+		font-size: 18px;
+	}
+
+	#online-queue-form button {
+		cursor: pointer;
+		background: #5e5e5e;
+		padding: 10px 20px;
+		color: #fff;
+		border: 0;
+		font-size: 16px;
+		outline: 0;
+		border-radius: 10px;
+		transition: all 0.3s ease;
+	}
+	#online-queue-form button:hover {
+		background: #424242;
 	}
 
 	#online-queue-form #info {
 		display: flex !important;
 		flex-direction: column !important;
 		gap: 5px !important;
+		margin-bottom: 15px;
+	}
+
+	#online-queue-form #info .title {
+		font-size: 1.5rem;
+		margin-bottom: 15px;
+	}
+
+	#online-queue-form #info .info-time {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		font-size: 1.2rem;
 	}
 
 	#online-queue-form.unactive {
@@ -128,6 +185,7 @@
 		padding: 20px !important;
 		background: rgba(255, 255, 255, 0.8) !important;
 		backdrop-filter: blur(5px) !important;
+		border-radius: 10px !important;
 		opacity: 0 !important;
 		visibility: hidden !important;
 	}
@@ -274,6 +332,16 @@
 		height: 1rem;
 		border: 1px solid #727272;
 		border-radius: 3px;
+	}
+
+	.online-queue-form__label {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	.online-queue-form__text {
+		margin: 15px 0;
 	}
 
 	@keyframes fadeIn {

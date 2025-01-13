@@ -1,5 +1,5 @@
 import { AppointmentWithRelations } from '@/entities/appointment/model'
-import { weekDays } from '@/shared/lib'
+import { getWordEnding, weekDays } from '@/shared/lib'
 import { Button } from '@/shared/ui'
 import Link from 'next/link'
 import { FC } from 'react'
@@ -27,7 +27,12 @@ export const EventCard: FC<Props> = ({ event }) => {
 				</div>
 			</div>
 			<span className='block mb-2 text-lg text-primary/60'>
-				{event.appointments.length} записи
+				{event.appointments.length}{' '}
+				{getWordEnding(event.appointments.length, [
+					'запись',
+					'записи',
+					'записей',
+				])}
 			</span>
 			{event.schedule && !!event.schedule.times.length && (
 				<div className='flex flex-col gap-1'>

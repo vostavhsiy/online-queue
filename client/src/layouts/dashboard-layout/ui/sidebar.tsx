@@ -105,14 +105,16 @@ export const DashboardSidebar = () => {
 												<CollapsibleContent>
 													<SidebarMenuSub>
 														{item.links.map(link => {
+															let isActive = false
+															if (link.url === '/dashboard') {
+																isActive = pathname === link.url
+															} else {
+																isActive = pathname.includes(link.url)
+															}
 															return (
 																<SidebarMenuSubItem key={link.url + link.title}>
 																	<SidebarMenuButton
-																		variant={
-																			pathname === link.url
-																				? 'outline'
-																				: 'default'
-																		}
+																		variant={isActive ? 'outline' : 'default'}
 																		asChild
 																	>
 																		<Link href={link.url}>
@@ -129,10 +131,16 @@ export const DashboardSidebar = () => {
 										</Collapsible>
 									)
 								}
+								let isActive = false
+								if (item.url === '/dashboard') {
+									isActive = pathname === item.url
+								} else {
+									isActive = pathname.includes(item.url)
+								}
 								return (
 									<SidebarMenuItem key={item.title}>
 										<SidebarMenuButton
-											variant={pathname === item.url ? 'outline' : 'default'}
+											variant={isActive ? 'outline' : 'default'}
 											asChild
 										>
 											<Link href={item.url}>
