@@ -11,8 +11,8 @@ RUN npm install --force
 COPY . .
 COPY .env .
 
-RUN npx prisma db push
 RUN npx prisma generate
+RUN npx prisma db push
 
 RUN npm run build
 EXPOSE 3000
