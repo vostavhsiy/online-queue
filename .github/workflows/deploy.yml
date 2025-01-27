@@ -10,15 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Run remote command via SSH
-      uses: D3rHase/ssh-command-action@latest
-      with:
-        host: ${{ secrets.HOST }}
-        port: ${{ secrets.PORT }}
-        user: ${{ secrets.USER }}
-        private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-        host_fingerprint: ${{ secrets.HOST_FINGERPRINT }}
-        command: echo 'Hello, World!!'
+      - name: Run remote command via SSH
+        uses: D3rHase/ssh-command-action@latest
+        with:
+          host: ${{ secrets.HOST }}
+          user: ${{ secrets.USER }}
+          private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host_fingerprint: ${{ secrets.HOST_FINGERPRINT }}
+          command: echo 'Hello, World!!'
