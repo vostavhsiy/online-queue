@@ -1,4 +1,4 @@
-name: deploy staging
+name: Deploy on Commit
 
 on:
   push:
@@ -8,20 +8,20 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+    - name: Run remote command via SSH
+      uses: D3rHase/ssh-command-action@latest
+      with:
+        host: ${{ secrets.HOST }}
+        port: ${{ secrets.PORT }}
+        user: ${{ secrets.USER }}
+        private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        host_fingerprint: ${{ secrets.HOST_FINGERPRINT }}
+        command: echo 'Hello, World!'
 
-      - name: Deploy to server
-        run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} root@176.114.64.143 << 'EOF'
-          cd online-queue
-          git pull
-          pm2 restart all
-          EOF
+    - name: Notify Command Success
+      run: echo "Command executed on ${{ secrets.HOST }} successfully!"
