@@ -1,4 +1,4 @@
-name: Deploy on Commit
+name: Deploy
 
 on:
   push:
@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
     - name: Run remote command via SSH
       uses: D3rHase/ssh-command-action@latest
