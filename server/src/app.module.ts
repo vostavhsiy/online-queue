@@ -3,7 +3,9 @@ import { TransactionalAdapterPrisma } from '@nestjs-cls/transactional-adapter-pr
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { ClsModule } from 'nestjs-cls';
+import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AppointmentsModule } from './appointments/appointments.module';
@@ -12,18 +14,22 @@ import { AuthModule } from './auth/auth.module';
 import { CompaniesModule } from './companies/companies.module';
 import { CustomersModule } from './customers/customers.module';
 import { DbModule } from './db/db.module';
+import { DbService } from './db/db.service';
 import { DurationsModule } from './durations/durations.module';
 import { EmailsModule } from './emails/emails.module';
 import { EventsModule } from './events/events.module';
+import { LibModule } from './lib/lib.module';
 import { MailModule } from './mail/mail.module';
 import { SchedulesModule } from './schedules/schedules.module';
 import { TimesModule } from './times/times.module';
 import { WidgetsModule } from './widgets/widgets.module';
-import { DbService } from './db/db.service'
-import { LibModule } from './lib/lib.module';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'assets'),
+      serveRoot: "/server/static"
+    }),
     ClsModule.forRoot({
       plugins: [
         new ClsPluginTransactional({

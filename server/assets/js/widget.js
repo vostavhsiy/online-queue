@@ -1,8 +1,8 @@
 class Widget {
   rootId = 'queue-widget';
 
-  url_widget = 'http://localhost:3000/widgets/';
-  url_style = 'http://localhost:3000/css/style.css';
+  url_widget = 'https://online-queue.ru/server/widgets/';
+  url_style = 'https://online-queue.ru/server/static/css/style.css';
   appointments = [];
 
   currentEvent;
@@ -187,11 +187,11 @@ class Widget {
       const root = document.getElementById('online-queue-calendar');
       root.innerHTML = '';
       const script = document.createElement('script');
-      script.src = 'http://localhost:3000/js/full-calendar.js';
+      script.src = 'https://online-queue.ru/server/js/full-calendar.js';
       script.setAttribute('defer', true);
       document.head.appendChild(script);
       const localeScript = document.createElement('script');
-      localeScript.src = `http://localhost:3000/js/ru.global.js`;
+      localeScript.src = `https://online-queue.ru/server/js/ru.global.js`;
       localeScript.setAttribute('defer', true);
       document.head.appendChild(localeScript);
     } catch (error) {

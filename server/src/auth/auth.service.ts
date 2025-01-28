@@ -16,8 +16,9 @@ export class AuthService {
   ) {}
 
   async signUp(email: string, name: string, password: string) {
-    console.log(email, name, password)
+    console.log(email, name, password);
     const candidate = await this.companiesService.findOne(email);
+    console.log(candidate);
     if (candidate) throw new BadRequestException('Company already signed up!');
     const newCompany = await this.companiesService.create({
       email,

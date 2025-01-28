@@ -11,7 +11,7 @@ async function bootstrap() {
     origin: true,
     credentials: true,
   });
-  app.useStaticAssets(path.join(__dirname, '..', 'assets'));
+  // app.useStaticAssets(path.join(__dirname, '..', 'assets'));
   app.setBaseViewsDir(path.join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
   app.useGlobalPipes(new ValidationPipe());
