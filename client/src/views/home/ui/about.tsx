@@ -111,7 +111,7 @@ export const About = () => {
 	return (
 		<div
 			ref={container}
-			className='container px-8 py-40 flex gap-5 justify-between items-center mx-auto w-3/4'
+			className='container px-8 py-24 flex gap-5 justify-between items-center mx-auto w-3/4'
 		>
 			<div className='w-1/2'>
 				<h2 className='opacity-0 title text-2xl font-semibold mb-4'>

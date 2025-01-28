@@ -110,7 +110,7 @@ export const Intro = () => {
 	return (
 		<div
 			ref={container}
-			className='relative h-screen max-h-[1000px] bg-secondary/30 border-b'
+			className='relative h-screen max-h-[1000px] bg-secondary/40 border-b'
 		>
 			<div className='relative container px-8 mx-auto h-full flex items-center justify-center'>
 				<div className='w-1/3'>

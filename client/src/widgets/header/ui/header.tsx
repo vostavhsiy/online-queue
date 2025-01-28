@@ -36,6 +36,12 @@ export const Header = () => {
 				<Logo />
 				<div className='flex items-center gap-3'>
 					<Link
+						href={'/#contacts'}
+						className='text-sm mr-8 transition-all text-primary/60 hover:text-accent'
+					>
+						Контакты
+					</Link>
+					<Link
 						href={'/privacy'}
 						className='text-sm mr-8 transition-all text-primary/60 hover:text-accent'
 					>

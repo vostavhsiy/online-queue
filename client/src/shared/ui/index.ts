@@ -1,4 +1,6 @@
 export { Button, type ButtonProps } from './button'
+export * from './card'
+export * from './carousel'
 export * from './checkbox'
 export * from './code'
 export * from './collapsible'
