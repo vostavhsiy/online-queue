@@ -20,4 +20,4 @@ jobs:
           user: ${{ secrets.USER }}
           private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           host_fingerprint: ${{ secrets.HOST_FINGERPRINT }}
-          command: echo 'Hello, World!!'
+          command: source ~/.nvm/nvm.sh; ~/deploy.sh
