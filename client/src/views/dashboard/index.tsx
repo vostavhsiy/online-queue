@@ -26,7 +26,7 @@ const DashboardScreen = async () => {
 			) : (
 				<div className='flex items-center gap-3'>
 					<p className='text-destructive'>Записей нет!</p>
-					<Link className='underline' href='/schedule'>
+					<Link className='underline' href='/dashboard/schedule'>
 						Добавьте новую запись!
 					</Link>
 				</div>
