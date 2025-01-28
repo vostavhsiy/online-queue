@@ -27,7 +27,7 @@ export const Header = () => {
 	return (
 		<header
 			ref={container}
-			className='opacity-0 fixed w-full	top-0 left-0 z-[1] bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex items-center justify-center text-primary'
+			className='opacity-0 fixed w-full	top-0 left-0 z-[1] bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex items-center justify-center text-primary border-b'
 		>
 			<div
 				ref={inner}
