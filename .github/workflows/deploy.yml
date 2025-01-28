@@ -20,7 +20,4 @@ jobs:
           user: ${{ secrets.USER }}
           private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           host_fingerprint: ${{ secrets.HOST_FINGERPRINT }}
-          command: |
-            cd "./online-queue"
-            git pull
-            npx pm2 reload all
+          command: source ~/.nvm/nvm.sh; ~/deploy.sh
