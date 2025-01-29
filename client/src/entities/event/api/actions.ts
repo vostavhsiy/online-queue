@@ -8,7 +8,8 @@ export const createEvent = async (payload: CreateEventPayload) => {
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -18,7 +19,8 @@ export const getAllEvents = async () => {
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -28,7 +30,8 @@ export const getEvent = async (id: string) => {
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -38,7 +41,8 @@ export const updateEvent = async (id: string, payload: UpdateEventPayload) => {
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -48,6 +52,7 @@ export const deleteEvent = async (id: string) => {
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }

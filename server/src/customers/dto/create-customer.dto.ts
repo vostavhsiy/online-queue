@@ -12,4 +12,14 @@ export class CreateCustomerDto {
 
   @IsNotEmpty()
   appointmentId: string;
+
+  info?: {
+    id: string;
+    title: string;
+    date: string;
+    time: {
+      from: string;
+      to: string;
+    };
+  };
 }

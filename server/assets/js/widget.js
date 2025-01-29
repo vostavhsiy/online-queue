@@ -89,6 +89,7 @@ class Widget {
                     name: data.get('name'),
                     phone: data.get('phone'),
                     appointmentId: data.get('appointmentId'),
+                    info: this.currentEvent,
                   };
                   fetch(event.target.action, {
                     body: JSON.stringify(body),

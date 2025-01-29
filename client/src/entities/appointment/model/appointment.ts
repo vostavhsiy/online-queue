@@ -6,4 +6,5 @@ export interface Appointment {
 	customerId?: string
 	eventId: string
 	durationId?: string
+	isFromSchedule?: boolean
 }

@@ -3,9 +3,11 @@
 import { updateEmail } from '@/entities/email/api'
 import { Button } from '@/shared/ui'
 import { Editor } from '@tinymce/tinymce-react'
+import { AxiosError } from 'axios'
 import * as hbs from 'handlebars'
 import { RotateCcw } from 'lucide-react'
 import { FC, useEffect, useRef, useState, useTransition } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
 	emailId: string
@@ -52,22 +54,33 @@ const EmailEditor: FC<Props> = ({
 		const html = editorRef.current?.getContent()
 		if (!html) return
 		startTransition(async () => {
-			const res = await updateEmail(
-				emailId,
-				isUnmake ? { unmakeCustomHtml: html } : { makeCustomHtml: html }
-			)
-			console.log(res)
+			try {
+				const res = await updateEmail(
+					emailId,
+					isUnmake ? { unmakeCustomHtml: html } : { makeCustomHtml: html }
+				)
+				console.log(res)
+				toast.success('Сохранено!')
+			} catch (error) {
+				//@ts-ignore
+				toast.error(error.message)
+			}
 		})
 	}
 
 	const refresh = () => {
 		startTransition(async () => {
-			const res = updateEmail(
-				emailId,
-				isUnmake ? { unmakeCustomHtml: null } : { makeCustomHtml: null }
-			)
-			setPreviewHtml(emailHtml)
-			editorRef.current?.setContent(emailMarkup)
+			try {
+				const res = await updateEmail(
+					emailId,
+					isUnmake ? { unmakeCustomHtml: null } : { makeCustomHtml: null }
+				)
+				setPreviewHtml(emailHtml)
+				editorRef.current?.setContent(emailMarkup)
+			} catch (error) {
+				//@ts-ignore
+				toast.error(error.message)
+			}
 		})
 	}
 

@@ -14,6 +14,7 @@ import {
 	Separator,
 } from '@/shared/ui'
 import { FC, useState, useTransition } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
 	events: Array<{
@@ -51,15 +52,27 @@ export const AppointmentUpdateForm: FC<Props> = ({
 		setOpen(false)
 		if (appointmentId) {
 			startTransition(async () => {
-				const res = await deleteAppointment(appointmentId)
+				try {
+					const res = await deleteAppointment(appointmentId)
+					toast.success('Запись удалена!')
+				} catch (error) {
+					//@ts-ignore
+					toast.error(error.message)
+				}
 				close && close()
 			})
 		}
 	}
 
 	const sumbitHandler = (data: FormData) => {
-		startTransition(() => {
-			submit(data)
+		startTransition(async () => {
+			try {
+				await submit(data)
+				toast.success('Запись обновлена!')
+			} catch (error) {
+				//@ts-ignore
+				toast.error(error.message)
+			}
 		})
 	}
 

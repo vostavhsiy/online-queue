@@ -21,8 +21,23 @@ export class CustomersService {
   @Transactional()
   async create(createCustomerDto: CreateCustomerDto) {
     try {
+      const appointment = await this.dbService.appointment.findUnique({
+        where: { id: createCustomerDto.appointmentId },
+      });
+      let newAppointment;
+      if (createCustomerDto.info) {
+        newAppointment = await this.dbService.appointment.create({
+          data: {
+            date: createCustomerDto.info.date,
+            durationId: appointment.durationId,
+            eventId: appointment.eventId,
+            isFromSchedule: true,
+          },
+        });
+      }
+      const { info, ...dto } = createCustomerDto;
       const customer = await this.txHost.tx.customer.create({
-        data: createCustomerDto,
+        data: { ...dto, appointmentId: newAppointment?.id || appointment.id },
         include: {
           appointment: {
             include: {
@@ -44,6 +59,7 @@ export class CustomersService {
         customer.appointment.event.company.name,
         customer.appointment.event.company.emailHtml,
         customer.appointment.event.name,
+        //@ts-ignore
         customer,
       );
       return customer;

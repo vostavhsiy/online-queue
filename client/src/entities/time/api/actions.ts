@@ -1,10 +1,6 @@
 'use server'
 
-import {
-	CreateTimePayload,
-	TimeApi,
-	UpdateTimePayload,
-} from './api'
+import { CreateTimePayload, TimeApi, UpdateTimePayload } from './api'
 
 export const createTime = async (payload: CreateTimePayload) => {
 	try {
@@ -12,21 +8,19 @@ export const createTime = async (payload: CreateTimePayload) => {
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
-
-export const updateTime = async (
-	id: string,
-	payload: UpdateTimePayload
-) => {
+export const updateTime = async (id: string, payload: UpdateTimePayload) => {
 	try {
 		const res = await TimeApi.updateTime(id, payload)
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -36,6 +30,7 @@ export const deleteTime = async (id: string) => {
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }

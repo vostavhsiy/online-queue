@@ -4,6 +4,7 @@ import { Button } from '@/shared/ui'
 import { LogOut } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 import { FC, useTransition } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
 	isIcon?: boolean
@@ -13,7 +14,16 @@ const LogoutButton: FC<Props> = ({ isIcon }) => {
 	const [isPending, startTransition] = useTransition()
 
 	const handleClick = () => {
-		startTransition(() => signOut({ callbackUrl: '/' }))
+		startTransition(() =>
+			signOut({ callbackUrl: '/' })
+				.catch(error => {
+					//@ts-ignore
+					toast.error(error.message)
+				})
+				.then(res => {
+					toast.success('Выход выполнен!')
+				})
+		)
 	}
 
 	return (

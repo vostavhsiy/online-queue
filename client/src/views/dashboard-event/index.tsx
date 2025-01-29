@@ -18,6 +18,14 @@ const DashboardEvent: NextPage<Props> = async props => {
 	const events = await getAllEvents()
 	if (!event || !events) notFound()
 
+	const appointments =
+		!!event.schedule && !!event.schedule.times.length
+			? event.schedule.times.reduce((res: AppointmentWithRelations[], time) => {
+					res = [...res, ...time.appointments]
+					return res
+			  }, [])
+			: null
+
 	return (
 		<div className='h-full flex flex-col'>
 			<div className='mb-10 flex items-start gap-3 justify-between'>
@@ -49,15 +57,11 @@ const DashboardEvent: NextPage<Props> = async props => {
 						})}
 				</div>
 			</div>
-			{event.schedule && !!event.schedule.times.length && (
+			{!!appointments?.length && (
 				<div className='flex flex-col gap-1'>
 					<span className='block mb-2 text-2xl'>Расписание</span>
 					<div className='flex flex-col gap-1'>
-						{event.schedule.times
-							.reduce((res: AppointmentWithRelations[], time) => {
-								res = [...res, ...time.appointments]
-								return res
-							}, [])
+						{appointments
 							.sort((a1, a2) => Number(a1.weekDay) - Number(a2.weekDay))
 							.map(appointment => {
 								if (appointment.weekDay === undefined) return null

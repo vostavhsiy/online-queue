@@ -14,7 +14,8 @@ export const createAppointment = async (payload: CreateAppointmentPayload) => {
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -24,7 +25,8 @@ export const getAppointment = async (id: string) => {
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -38,7 +40,8 @@ export const updateAppointment = async (
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -50,6 +53,7 @@ export const deleteAppointment = async (id: string) => {
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }

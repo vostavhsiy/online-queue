@@ -22,6 +22,7 @@ import {
 import { Check, ChevronsUpDown, X } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useMemo, useState, useTransition } from 'react'
+import { toast } from 'sonner'
 
 const CreateEventForm = () => {
 	const router = useRouter()
@@ -91,22 +92,28 @@ const CreateEventForm = () => {
 			}
 		})
 		startTransition(async () => {
-			const res = await createEvent({
-				name: eventTitle,
-				schedule: isScheduleAdded
-					? {
-							times: Object.entries(timesDays).map(time => ({
-								weekDay: +time[0],
-								times: time[1],
-								appointments: time[1].map(t => ({
-									duration: t,
-									date: new Date(),
+			try {
+				const res = await createEvent({
+					name: eventTitle,
+					schedule: isScheduleAdded
+						? {
+								times: Object.entries(timesDays).map(time => ({
+									weekDay: +time[0],
+									times: time[1],
+									appointments: time[1].map(t => ({
+										duration: t,
+										date: new Date(),
+									})),
 								})),
-							})),
-					  }
-					: undefined,
-			})
-			router.push('/dashboard/events')
+						  }
+						: undefined,
+				})
+				router.push('/dashboard/events')
+				toast.success('Мероприятие добавлено!')
+			} catch (error) {
+				//@ts-ignore
+				toast.error(error.message)
+			}
 		})
 	}
 

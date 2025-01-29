@@ -24,7 +24,7 @@ export default async function RootLayout({
 		<html lang='en' suppressHydrationWarning>
 			<body className={cn('bg-background', roboto_condensed.className)}>
 				<Providers>{children}</Providers>
-				<Toaster />
+				<Toaster position='top-right' richColors closeButton theme='light' />
 			</body>
 		</html>
 	)

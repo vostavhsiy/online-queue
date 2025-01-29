@@ -31,6 +31,7 @@ export class TimesService {
       const appointments: Appointment[] = [];
       for (const appointment of apps) {
         appointments.push(
+          //@ts-ignore
           await this.appointmentsService.create(
             { ...appointment, eventId, weekDay: timeDto.weekDay },
             tx,
