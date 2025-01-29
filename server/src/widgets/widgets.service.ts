@@ -53,7 +53,7 @@ export class WidgetsService {
       if (widget.customHtml) {
         const template = this.engine.handlebars.compile(widget.customHtml, {});
         const html = template(renderData);
-        return html;
+        return { html };
       }
       const html = await this.engine.render('views/widget.hbs', renderData);
       const url = this.libService.getServerAddress();
