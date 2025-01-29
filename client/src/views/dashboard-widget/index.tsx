@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 
 const DashboardWidgetScreen = async () => {
 	const company = await auth()
-	if (!company?.widget) redirect('/dashboard')
+	if (typeof company === 'string' || !company?.widget) redirect('/dashboard')
 
 	const widget = await getWidget(company.widget.id)
 	if (!widget) redirect('/dashboard')

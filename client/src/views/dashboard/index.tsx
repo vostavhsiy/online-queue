@@ -8,8 +8,8 @@ import { redirect } from 'next/navigation'
 
 const DashboardScreen = async () => {
 	const company = await auth()
-	if (!company) redirect('/signin')
-		
+	if (!company || typeof company === 'string') redirect('/signin')
+
 	const appointments = sortAppointments(
 		company.events.reduce(
 			(acc, app) => [...acc, ...app.appointments],
@@ -20,7 +20,7 @@ const DashboardScreen = async () => {
 		if (appointment.isFromSchedule && !appointment.customer) return false
 	})
 	const events = await getAllEvents()
-	if (!appointments || !events) redirect('/')
+	if (!appointments || !events || typeof events === 'string') redirect('/')
 
 	return (
 		<>

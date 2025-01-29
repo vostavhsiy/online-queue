@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 
 const DashboardInjectScreen = async () => {
 	const company = await auth()
-	if (!company?.widget?.id) redirect('/signin')
+	if (typeof company === 'string' || !company?.widget?.id) redirect('/signin')
 
 	return (
 		<>
