@@ -15,29 +15,6 @@ import {
 	PopoverTrigger,
 } from '@/shared/ui/'
 
-const frameworks = [
-	{
-		value: 'next.js',
-		label: 'Next.js',
-	},
-	{
-		value: 'sveltekit',
-		label: 'SvelteKit',
-	},
-	{
-		value: 'nuxt.js',
-		label: 'Nuxt.js',
-	},
-	{
-		value: 'remix',
-		label: 'Remix',
-	},
-	{
-		value: 'astro',
-		label: 'Astro',
-	},
-]
-
 interface Props {
 	values: Array<{ label: string; value: string }>
 	open?: boolean
@@ -62,15 +39,15 @@ export const Combobox: FC<Props> = ({
 					aria-expanded={open}
 					className='w-[200px] justify-between'
 				>
-					{value ? values.find(v => v.value === value)?.label : 'Select...'}
+					{value ? values.find(v => v.value === value)?.label : 'Выбрать...'}
 					<ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
 				</Button>
 			</PopoverTrigger>
 			<PopoverContent className='w-[200px] p-0'>
 				<Command>
-					<CommandInput placeholder='Search...' />
+					<CommandInput placeholder='Поиск...' />
 					<CommandList>
-						<CommandEmpty>No thing found.</CommandEmpty>
+						<CommandEmpty>Пусто.</CommandEmpty>
 						<CommandGroup>
 							{values.map(v => (
 								<CommandItem
