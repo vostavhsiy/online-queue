@@ -5,7 +5,7 @@ import { VkSignInButton } from '@/widgets/vk-signin-button'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { Suspense, useEffect, useTransition } from 'react'
+import { Suspense, useTransition } from 'react'
 import { toast } from 'sonner'
 
 const SignInForm = () => {
@@ -33,16 +33,10 @@ const SignInForm = () => {
 		})
 	}
 
-	useEffect(() => {
-		if (searchParams.get('error'))
-			toast.error('Неправильный логин или пароль!', {
-				duration: Infinity,
-			})
-	}, [])
-
 	return (
 		<div className='w-full flex flex-col items-center gap-8'>
 			<h2 className='text-2xl'>Вход</h2>
+			{searchParams.get('error') && <p>Неправильный логин или пароль!</p>}
 			<form className='w-full flex flex-col gap-5' action={handleSubmit}>
 				<Input
 					required

@@ -13,7 +13,7 @@ export const createCustomer = async (payload: CreateCustomerPayload) => {
 	} catch (error) {
 		console.log(error)
 		//@ts-ignore
-		throw error.response?.data?.message || 'Произошла ошибка!'
+		return error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -27,7 +27,7 @@ export const updateCustomer = async (
 	} catch (error) {
 		console.log(error)
 		//@ts-ignore
-		throw error.response?.data?.message || 'Произошла ошибка!'
+		return error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -38,6 +38,6 @@ export const deleteCustomer = async (id: string) => {
 	} catch (error) {
 		console.log(error)
 		//@ts-ignore
-		throw error.response?.data?.message || 'Произошла ошибка!'
+		return error.response?.data?.message || 'Произошла ошибка!'
 	}
 }

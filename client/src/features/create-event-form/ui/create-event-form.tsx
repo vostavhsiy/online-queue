@@ -108,8 +108,12 @@ const CreateEventForm = () => {
 						  }
 						: undefined,
 				})
-				router.push('/dashboard/events')
-				toast.success('Мероприятие добавлено!')
+				if (!res || typeof res === 'string')
+					toast.error(res || 'Произошла ошибка. Попробуйте позже.')
+				else {
+					router.push('/dashboard/events')
+					toast.success('Мероприятие добавлено!')
+				}
 			} catch (error) {
 				//@ts-ignore
 				toast.error(error.message)

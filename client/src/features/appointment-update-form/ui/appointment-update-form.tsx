@@ -54,7 +54,9 @@ export const AppointmentUpdateForm: FC<Props> = ({
 			startTransition(async () => {
 				try {
 					const res = await deleteAppointment(appointmentId)
-					toast.success('Запись удалена!')
+					if (!res || typeof res === 'string')
+						toast.error(res || 'Произошла ошибка. Попробуйте позже.')
+					else toast.success('Запись удалена!')
 				} catch (error) {
 					//@ts-ignore
 					toast.error(error.message)
