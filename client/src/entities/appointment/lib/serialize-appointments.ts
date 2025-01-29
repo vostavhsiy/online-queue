@@ -32,6 +32,9 @@ export const serializeAppointmentsFromEvent = (
 				startTime.minutes
 
 			const start = new Date(appointment.date)
+			start.setHours(startTime.hours)
+			start.setMinutes(startTime.minutes)
+			start.setSeconds(0)
 
 			const end = new Date(appointment.date)
 			end.setMinutes(start.getMinutes() + durationMinutes)
