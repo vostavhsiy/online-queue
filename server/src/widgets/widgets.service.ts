@@ -163,6 +163,8 @@ export class WidgetsService {
               }
             : undefined;
 
+        console.log(rrule);
+
         const startTime = {
           hours: +appointment.duration.from.split(':')[0],
           minutes: +appointment.duration.from.split(':')[1],
