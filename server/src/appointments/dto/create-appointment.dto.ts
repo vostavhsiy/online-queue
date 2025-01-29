@@ -14,4 +14,5 @@ export class CreateAppointmentDto {
   timeId?: string;
   weekDay?: number;
   customerId?: string;
+  isFromSchedule?: boolean;
 }
