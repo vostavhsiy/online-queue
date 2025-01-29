@@ -28,7 +28,7 @@ export class CustomersService {
       if (createCustomerDto.info) {
         newAppointment = await this.dbService.appointment.create({
           data: {
-            date: createCustomerDto.info.date,
+            date: new Date(createCustomerDto.info.date),
             durationId: appointment.durationId,
             eventId: appointment.eventId,
             isFromSchedule: true,
