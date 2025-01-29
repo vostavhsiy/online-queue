@@ -6508,6 +6508,7 @@ export namespace Prisma {
     customerId: string | null
     eventId: string | null
     durationId: string | null
+    isFromSchedule: boolean | null
   }
 
   export type AppointmentMaxAggregateOutputType = {
@@ -6518,6 +6519,7 @@ export namespace Prisma {
     customerId: string | null
     eventId: string | null
     durationId: string | null
+    isFromSchedule: boolean | null
   }
 
   export type AppointmentCountAggregateOutputType = {
@@ -6528,6 +6530,7 @@ export namespace Prisma {
     customerId: number
     eventId: number
     durationId: number
+    isFromSchedule: number
     _all: number
   }
 
@@ -6548,6 +6551,7 @@ export namespace Prisma {
     customerId?: true
     eventId?: true
     durationId?: true
+    isFromSchedule?: true
   }
 
   export type AppointmentMaxAggregateInputType = {
@@ -6558,6 +6562,7 @@ export namespace Prisma {
     customerId?: true
     eventId?: true
     durationId?: true
+    isFromSchedule?: true
   }
 
   export type AppointmentCountAggregateInputType = {
@@ -6568,6 +6573,7 @@ export namespace Prisma {
     customerId?: true
     eventId?: true
     durationId?: true
+    isFromSchedule?: true
     _all?: true
   }
 
@@ -6665,6 +6671,7 @@ export namespace Prisma {
     customerId: string | null
     eventId: string
     durationId: string
+    isFromSchedule: boolean | null
     _count: AppointmentCountAggregateOutputType | null
     _avg: AppointmentAvgAggregateOutputType | null
     _sum: AppointmentSumAggregateOutputType | null
@@ -6694,6 +6701,7 @@ export namespace Prisma {
     customerId?: boolean
     eventId?: boolean
     durationId?: boolean
+    isFromSchedule?: boolean
     event?: boolean | EventDefaultArgs<ExtArgs>
     duration?: boolean | DurationDefaultArgs<ExtArgs>
     time?: boolean | Appointment$timeArgs<ExtArgs>
@@ -6708,6 +6716,7 @@ export namespace Prisma {
     customerId?: boolean
     eventId?: boolean
     durationId?: boolean
+    isFromSchedule?: boolean
     event?: boolean | EventDefaultArgs<ExtArgs>
     duration?: boolean | DurationDefaultArgs<ExtArgs>
     time?: boolean | Appointment$timeArgs<ExtArgs>
@@ -6721,6 +6730,7 @@ export namespace Prisma {
     customerId?: boolean
     eventId?: boolean
     durationId?: boolean
+    isFromSchedule?: boolean
   }
 
   export type AppointmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6751,6 +6761,7 @@ export namespace Prisma {
       customerId: string | null
       eventId: string
       durationId: string
+      isFromSchedule: boolean | null
     }, ExtArgs["result"]["appointment"]>
     composites: {}
   }
@@ -7155,6 +7166,7 @@ export namespace Prisma {
     readonly customerId: FieldRef<"Appointment", 'String'>
     readonly eventId: FieldRef<"Appointment", 'String'>
     readonly durationId: FieldRef<"Appointment", 'String'>
+    readonly isFromSchedule: FieldRef<"Appointment", 'Boolean'>
   }
     
 
@@ -10363,7 +10375,8 @@ export namespace Prisma {
     timeId: 'timeId',
     customerId: 'customerId',
     eventId: 'eventId',
-    durationId: 'durationId'
+    durationId: 'durationId',
+    isFromSchedule: 'isFromSchedule'
   };
 
   export type AppointmentScalarFieldEnum = (typeof AppointmentScalarFieldEnum)[keyof typeof AppointmentScalarFieldEnum]
@@ -10465,6 +10478,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -10754,6 +10774,7 @@ export namespace Prisma {
     customerId?: StringNullableFilter<"Appointment"> | string | null
     eventId?: StringFilter<"Appointment"> | string
     durationId?: StringFilter<"Appointment"> | string
+    isFromSchedule?: BoolNullableFilter<"Appointment"> | boolean | null
     event?: XOR<EventRelationFilter, EventWhereInput>
     duration?: XOR<DurationRelationFilter, DurationWhereInput>
     time?: XOR<TimeNullableRelationFilter, TimeWhereInput> | null
@@ -10768,6 +10789,7 @@ export namespace Prisma {
     customerId?: SortOrderInput | SortOrder
     eventId?: SortOrder
     durationId?: SortOrder
+    isFromSchedule?: SortOrderInput | SortOrder
     event?: EventOrderByWithRelationInput
     duration?: DurationOrderByWithRelationInput
     time?: TimeOrderByWithRelationInput
@@ -10785,6 +10807,7 @@ export namespace Prisma {
     customerId?: StringNullableFilter<"Appointment"> | string | null
     eventId?: StringFilter<"Appointment"> | string
     durationId?: StringFilter<"Appointment"> | string
+    isFromSchedule?: BoolNullableFilter<"Appointment"> | boolean | null
     event?: XOR<EventRelationFilter, EventWhereInput>
     duration?: XOR<DurationRelationFilter, DurationWhereInput>
     time?: XOR<TimeNullableRelationFilter, TimeWhereInput> | null
@@ -10799,6 +10822,7 @@ export namespace Prisma {
     customerId?: SortOrderInput | SortOrder
     eventId?: SortOrder
     durationId?: SortOrder
+    isFromSchedule?: SortOrderInput | SortOrder
     _count?: AppointmentCountOrderByAggregateInput
     _avg?: AppointmentAvgOrderByAggregateInput
     _max?: AppointmentMaxOrderByAggregateInput
@@ -10817,6 +10841,7 @@ export namespace Prisma {
     customerId?: StringNullableWithAggregatesFilter<"Appointment"> | string | null
     eventId?: StringWithAggregatesFilter<"Appointment"> | string
     durationId?: StringWithAggregatesFilter<"Appointment"> | string
+    isFromSchedule?: BoolNullableWithAggregatesFilter<"Appointment"> | boolean | null
   }
 
   export type DurationWhereInput = {
@@ -11219,6 +11244,7 @@ export namespace Prisma {
     date: Date | string
     weekDay?: number | null
     customerId?: string | null
+    isFromSchedule?: boolean | null
     event: EventCreateNestedOneWithoutAppointmentsInput
     duration: DurationCreateNestedOneWithoutAppointmentsInput
     time?: TimeCreateNestedOneWithoutAppointmentsInput
@@ -11233,6 +11259,7 @@ export namespace Prisma {
     customerId?: string | null
     eventId: string
     durationId: string
+    isFromSchedule?: boolean | null
     customer?: CustomerUncheckedCreateNestedOneWithoutAppointmentInput
   }
 
@@ -11241,6 +11268,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     weekDay?: NullableIntFieldUpdateOperationsInput | number | null
     customerId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromSchedule?: NullableBoolFieldUpdateOperationsInput | boolean | null
     event?: EventUpdateOneRequiredWithoutAppointmentsNestedInput
     duration?: DurationUpdateOneRequiredWithoutAppointmentsNestedInput
     time?: TimeUpdateOneWithoutAppointmentsNestedInput
@@ -11255,6 +11283,7 @@ export namespace Prisma {
     customerId?: NullableStringFieldUpdateOperationsInput | string | null
     eventId?: StringFieldUpdateOperationsInput | string
     durationId?: StringFieldUpdateOperationsInput | string
+    isFromSchedule?: NullableBoolFieldUpdateOperationsInput | boolean | null
     customer?: CustomerUncheckedUpdateOneWithoutAppointmentNestedInput
   }
 
@@ -11266,6 +11295,7 @@ export namespace Prisma {
     customerId?: string | null
     eventId: string
     durationId: string
+    isFromSchedule?: boolean | null
   }
 
   export type AppointmentUpdateManyMutationInput = {
@@ -11273,6 +11303,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     weekDay?: NullableIntFieldUpdateOperationsInput | number | null
     customerId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromSchedule?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type AppointmentUncheckedUpdateManyInput = {
@@ -11283,6 +11314,7 @@ export namespace Prisma {
     customerId?: NullableStringFieldUpdateOperationsInput | string | null
     eventId?: StringFieldUpdateOperationsInput | string
     durationId?: StringFieldUpdateOperationsInput | string
+    isFromSchedule?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type DurationCreateInput = {
@@ -11700,6 +11732,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type DurationRelationFilter = {
     is?: DurationWhereInput
     isNot?: DurationWhereInput
@@ -11728,6 +11765,7 @@ export namespace Prisma {
     customerId?: SortOrder
     eventId?: SortOrder
     durationId?: SortOrder
+    isFromSchedule?: SortOrder
   }
 
   export type AppointmentAvgOrderByAggregateInput = {
@@ -11742,6 +11780,7 @@ export namespace Prisma {
     customerId?: SortOrder
     eventId?: SortOrder
     durationId?: SortOrder
+    isFromSchedule?: SortOrder
   }
 
   export type AppointmentMinOrderByAggregateInput = {
@@ -11752,6 +11791,7 @@ export namespace Prisma {
     customerId?: SortOrder
     eventId?: SortOrder
     durationId?: SortOrder
+    isFromSchedule?: SortOrder
   }
 
   export type AppointmentSumOrderByAggregateInput = {
@@ -11804,6 +11844,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type DurationCountOrderByAggregateInput = {
@@ -12279,6 +12327,10 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+  }
+
   export type EventUpdateOneRequiredWithoutAppointmentsNestedInput = {
     create?: XOR<EventCreateWithoutAppointmentsInput, EventUncheckedCreateWithoutAppointmentsInput>
     connectOrCreate?: EventCreateOrConnectWithoutAppointmentsInput
@@ -12538,6 +12590,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -12594,6 +12651,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type EventCreateWithoutCompanyInput = {
@@ -12764,6 +12829,7 @@ export namespace Prisma {
     date: Date | string
     weekDay?: number | null
     customerId?: string | null
+    isFromSchedule?: boolean | null
     duration: DurationCreateNestedOneWithoutAppointmentsInput
     time?: TimeCreateNestedOneWithoutAppointmentsInput
     customer?: CustomerCreateNestedOneWithoutAppointmentInput
@@ -12776,6 +12842,7 @@ export namespace Prisma {
     timeId?: string | null
     customerId?: string | null
     durationId: string
+    isFromSchedule?: boolean | null
     customer?: CustomerUncheckedCreateNestedOneWithoutAppointmentInput
   }
 
@@ -12866,6 +12933,7 @@ export namespace Prisma {
     customerId?: StringNullableFilter<"Appointment"> | string | null
     eventId?: StringFilter<"Appointment"> | string
     durationId?: StringFilter<"Appointment"> | string
+    isFromSchedule?: BoolNullableFilter<"Appointment"> | boolean | null
   }
 
   export type EventCreateWithoutScheduleInput = {
@@ -13000,6 +13068,7 @@ export namespace Prisma {
     date: Date | string
     weekDay?: number | null
     customerId?: string | null
+    isFromSchedule?: boolean | null
     event: EventCreateNestedOneWithoutAppointmentsInput
     duration: DurationCreateNestedOneWithoutAppointmentsInput
     customer?: CustomerCreateNestedOneWithoutAppointmentInput
@@ -13012,6 +13081,7 @@ export namespace Prisma {
     customerId?: string | null
     eventId: string
     durationId: string
+    isFromSchedule?: boolean | null
     customer?: CustomerUncheckedCreateNestedOneWithoutAppointmentInput
   }
 
@@ -13092,6 +13162,7 @@ export namespace Prisma {
     date: Date | string
     weekDay?: number | null
     customerId?: string | null
+    isFromSchedule?: boolean | null
     event: EventCreateNestedOneWithoutAppointmentsInput
     duration: DurationCreateNestedOneWithoutAppointmentsInput
     time?: TimeCreateNestedOneWithoutAppointmentsInput
@@ -13105,6 +13176,7 @@ export namespace Prisma {
     customerId?: string | null
     eventId: string
     durationId: string
+    isFromSchedule?: boolean | null
   }
 
   export type AppointmentCreateOrConnectWithoutCustomerInput = {
@@ -13128,6 +13200,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     weekDay?: NullableIntFieldUpdateOperationsInput | number | null
     customerId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromSchedule?: NullableBoolFieldUpdateOperationsInput | boolean | null
     event?: EventUpdateOneRequiredWithoutAppointmentsNestedInput
     duration?: DurationUpdateOneRequiredWithoutAppointmentsNestedInput
     time?: TimeUpdateOneWithoutAppointmentsNestedInput
@@ -13141,6 +13214,7 @@ export namespace Prisma {
     customerId?: NullableStringFieldUpdateOperationsInput | string | null
     eventId?: StringFieldUpdateOperationsInput | string
     durationId?: StringFieldUpdateOperationsInput | string
+    isFromSchedule?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type EventCreateWithoutAppointmentsInput = {
@@ -13324,6 +13398,7 @@ export namespace Prisma {
     date: Date | string
     weekDay?: number | null
     customerId?: string | null
+    isFromSchedule?: boolean | null
     event: EventCreateNestedOneWithoutAppointmentsInput
     time?: TimeCreateNestedOneWithoutAppointmentsInput
     customer?: CustomerCreateNestedOneWithoutAppointmentInput
@@ -13336,6 +13411,7 @@ export namespace Prisma {
     timeId?: string | null
     customerId?: string | null
     eventId: string
+    isFromSchedule?: boolean | null
     customer?: CustomerUncheckedCreateNestedOneWithoutAppointmentInput
   }
 
@@ -13535,6 +13611,7 @@ export namespace Prisma {
     timeId?: string | null
     customerId?: string | null
     durationId: string
+    isFromSchedule?: boolean | null
   }
 
   export type AppointmentUpdateWithoutEventInput = {
@@ -13542,6 +13619,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     weekDay?: NullableIntFieldUpdateOperationsInput | number | null
     customerId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromSchedule?: NullableBoolFieldUpdateOperationsInput | boolean | null
     duration?: DurationUpdateOneRequiredWithoutAppointmentsNestedInput
     time?: TimeUpdateOneWithoutAppointmentsNestedInput
     customer?: CustomerUpdateOneWithoutAppointmentNestedInput
@@ -13554,6 +13632,7 @@ export namespace Prisma {
     timeId?: NullableStringFieldUpdateOperationsInput | string | null
     customerId?: NullableStringFieldUpdateOperationsInput | string | null
     durationId?: StringFieldUpdateOperationsInput | string
+    isFromSchedule?: NullableBoolFieldUpdateOperationsInput | boolean | null
     customer?: CustomerUncheckedUpdateOneWithoutAppointmentNestedInput
   }
 
@@ -13564,6 +13643,7 @@ export namespace Prisma {
     timeId?: NullableStringFieldUpdateOperationsInput | string | null
     customerId?: NullableStringFieldUpdateOperationsInput | string | null
     durationId?: StringFieldUpdateOperationsInput | string
+    isFromSchedule?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type TimeCreateManyScheduleInput = {
@@ -13597,6 +13677,7 @@ export namespace Prisma {
     customerId?: string | null
     eventId: string
     durationId: string
+    isFromSchedule?: boolean | null
   }
 
   export type DurationUpdateWithoutTimesInput = {
@@ -13624,6 +13705,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     weekDay?: NullableIntFieldUpdateOperationsInput | number | null
     customerId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromSchedule?: NullableBoolFieldUpdateOperationsInput | boolean | null
     event?: EventUpdateOneRequiredWithoutAppointmentsNestedInput
     duration?: DurationUpdateOneRequiredWithoutAppointmentsNestedInput
     customer?: CustomerUpdateOneWithoutAppointmentNestedInput
@@ -13636,6 +13718,7 @@ export namespace Prisma {
     customerId?: NullableStringFieldUpdateOperationsInput | string | null
     eventId?: StringFieldUpdateOperationsInput | string
     durationId?: StringFieldUpdateOperationsInput | string
+    isFromSchedule?: NullableBoolFieldUpdateOperationsInput | boolean | null
     customer?: CustomerUncheckedUpdateOneWithoutAppointmentNestedInput
   }
 
@@ -13646,6 +13729,7 @@ export namespace Prisma {
     customerId?: NullableStringFieldUpdateOperationsInput | string | null
     eventId?: StringFieldUpdateOperationsInput | string
     durationId?: StringFieldUpdateOperationsInput | string
+    isFromSchedule?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type AppointmentCreateManyDurationInput = {
@@ -13655,6 +13739,7 @@ export namespace Prisma {
     timeId?: string | null
     customerId?: string | null
     eventId: string
+    isFromSchedule?: boolean | null
   }
 
   export type AppointmentUpdateWithoutDurationInput = {
@@ -13662,6 +13747,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     weekDay?: NullableIntFieldUpdateOperationsInput | number | null
     customerId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromSchedule?: NullableBoolFieldUpdateOperationsInput | boolean | null
     event?: EventUpdateOneRequiredWithoutAppointmentsNestedInput
     time?: TimeUpdateOneWithoutAppointmentsNestedInput
     customer?: CustomerUpdateOneWithoutAppointmentNestedInput
@@ -13674,6 +13760,7 @@ export namespace Prisma {
     timeId?: NullableStringFieldUpdateOperationsInput | string | null
     customerId?: NullableStringFieldUpdateOperationsInput | string | null
     eventId?: StringFieldUpdateOperationsInput | string
+    isFromSchedule?: NullableBoolFieldUpdateOperationsInput | boolean | null
     customer?: CustomerUncheckedUpdateOneWithoutAppointmentNestedInput
   }
 
@@ -13684,6 +13771,7 @@ export namespace Prisma {
     timeId?: NullableStringFieldUpdateOperationsInput | string | null
     customerId?: NullableStringFieldUpdateOperationsInput | string | null
     eventId?: StringFieldUpdateOperationsInput | string
+    isFromSchedule?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type TimeUpdateWithoutTimesInput = {

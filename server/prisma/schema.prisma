@@ -72,6 +72,8 @@ model Appointment {
   duration Duration  @relation(fields: [durationId], references: [id], onDelete: Cascade)
   time     Time?     @relation(fields: [timeId], references: [id], onDelete: Cascade)
   customer Customer?
+
+  isFromSchedule Boolean? @default(false)
 }
 
 model Duration {

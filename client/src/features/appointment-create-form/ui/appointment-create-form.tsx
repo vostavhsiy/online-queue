@@ -2,6 +2,7 @@
 
 import { Button, Combobox, Input } from '@/shared/ui'
 import { FC, useTransition } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
 	events: Array<{
@@ -27,8 +28,14 @@ export const AppointmentCreateForm: FC<Props> = ({
 	const [isPending, startTransition] = useTransition()
 
 	const sumbitHandler = (data: FormData) => {
-		startTransition(() => {
-			submit(data)
+		startTransition(async () => {
+			try {
+				await submit(data)
+				toast.success('Запись добавлена!')
+			} catch (error) {
+				//@ts-ignore
+				toast.error(error.message)
+			}
 		})
 	}
 

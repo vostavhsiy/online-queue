@@ -161,7 +161,8 @@ exports.Prisma.AppointmentScalarFieldEnum = {
   timeId: 'timeId',
   customerId: 'customerId',
   eventId: 'eventId',
-  durationId: 'durationId'
+  durationId: 'durationId',
+  isFromSchedule: 'isFromSchedule'
 };
 
 exports.Prisma.DurationScalarFieldEnum = {

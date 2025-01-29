@@ -12,6 +12,7 @@ import {
 	Input,
 } from '@/shared/ui'
 import { FC, useRef, useState, useTransition } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
 	company: Omit<Company, 'password'>
@@ -40,7 +41,13 @@ export const CompanySettingsForm: FC<Props> = ({ company }) => {
 		}
 		setOpen(false)
 		startTransition(async () => {
-			const res = await updateCompany(company.id, payload)
+			try {
+				const res = await updateCompany(company.id, payload)
+				toast.success('Настройки сохранены!')
+			} catch (error) {
+				//@ts-ignore
+				toast.error(error.message)
+			}
 		})
 	}
 

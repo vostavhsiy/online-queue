@@ -6,6 +6,7 @@ import { VkSignInButton } from '@/widgets/vk-signin-button'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
+import { toast } from 'sonner'
 
 const SignUpForm = () => {
 	const router = useRouter()
@@ -18,8 +19,14 @@ const SignUpForm = () => {
 		const password = data.get('password')?.toString()
 		if (!email || !password || !name) return
 		startTransition(async () => {
-			const res = await signUp({ email, name, password })
-			router.push('/signin')
+			try {
+				const res = await signUp({ email, name, password })
+				router.push('/signin')
+				toast.success('Регистрация выполнена!')
+			} catch (error) {
+				//@ts-ignore
+				toast.error(error.message)
+			}
 		})
 	}
 

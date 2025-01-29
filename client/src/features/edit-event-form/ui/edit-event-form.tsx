@@ -23,6 +23,7 @@ import {
 import { Check, ChevronsUpDown, X } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { FC, useEffect, useMemo, useState, useTransition } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
 	event: EventWithRelations
@@ -96,30 +97,41 @@ const EditEventForm: FC<Props> = ({ event }) => {
 			}
 		})
 		startTransition(async () => {
-			const res = await updateEvent(event.id, {
-				name: eventTitle,
-				schedule: isScheduleAdded
-					? {
-							times: Object.entries(timesDays).map(time => ({
-								weekDay: +time[0],
-								times: time[1],
-								appointments: time[1].map(t => ({
-									duration: t,
-									date: new Date(),
+			try {
+				const res = await updateEvent(event.id, {
+					name: eventTitle,
+					schedule: isScheduleAdded
+						? {
+								times: Object.entries(timesDays).map(time => ({
+									weekDay: +time[0],
+									times: time[1],
+									appointments: time[1].map(t => ({
+										duration: t,
+										date: new Date(),
+									})),
 								})),
-							})),
-					  }
-					: undefined,
-			})
-			router.push(`/dashboard/events/${event.id}`)
+						  }
+						: undefined,
+				})
+				router.push(`/dashboard/events/${event.id}`)
+				toast.success('Мероприятие обновлено!')
+			} catch (error) {
+				//@ts-ignore
+				toast.error(error.message)
+			}
 		})
 	}
 
 	const handleDelete = () => {
-		startTransition(() => {
-			deleteEvent(event.id).then(() => {
+		startTransition(async () => {
+			try {
+				await deleteEvent(event.id)
 				router.push(`/dashboard/events`)
-			})
+				toast.success('Мероприятие удалено!')
+			} catch (error) {
+				//@ts-ignore
+				toast.error(error.message)
+			}
 		})
 	}
 

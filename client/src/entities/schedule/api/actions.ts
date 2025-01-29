@@ -12,10 +12,10 @@ export const createSchedule = async (payload: CreateSchedulePayload) => {
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
-
 
 export const updateSchedule = async (
 	id: string,
@@ -26,7 +26,8 @@ export const updateSchedule = async (
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -36,6 +37,7 @@ export const deleteSchedule = async (id: string) => {
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }

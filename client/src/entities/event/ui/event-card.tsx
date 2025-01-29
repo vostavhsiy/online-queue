@@ -10,6 +10,14 @@ interface Props {
 }
 
 export const EventCard: FC<Props> = ({ event }) => {
+	const appointments =
+		!!event.schedule && !!event.schedule.times.length
+			? event.schedule.times.reduce((res: AppointmentWithRelations[], time) => {
+					res = [...res, ...time.appointments]
+					return res
+			  }, [])
+			: null
+
 	return (
 		<div className='p-5 shadow border rounded'>
 			<div className='mb-3 flex items-start gap-3 justify-between'>
@@ -34,15 +42,11 @@ export const EventCard: FC<Props> = ({ event }) => {
 					'записей',
 				])}
 			</span>
-			{event.schedule && !!event.schedule.times.length && (
+			{!!appointments?.length && (
 				<div className='flex flex-col gap-1'>
 					<span className='text-lg'>Расписание</span>
 					<div className='flex flex-col gap-1'>
-						{event.schedule.times
-							.reduce((res: AppointmentWithRelations[], time) => {
-								res = [...res, ...time.appointments]
-								return res
-							}, [])
+						{appointments
 							.sort((a1, a2) => Number(a1.weekDay) - Number(a2.weekDay))
 							.map(appointment => {
 								if (appointment.weekDay === undefined) return null

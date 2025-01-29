@@ -9,12 +9,16 @@ import { redirect } from 'next/navigation'
 const DashboardScreen = async () => {
 	const company = await auth()
 	if (!company) redirect('/signin')
+		
 	const appointments = sortAppointments(
 		company.events.reduce(
 			(acc, app) => [...acc, ...app.appointments],
 			[] as AppointmentWithRelations[]
 		)
-	)
+	).filter(appointment => {
+		if (!appointment.time) return false
+		if (appointment.isFromSchedule && !appointment.customer) return false
+	})
 	const events = await getAllEvents()
 	if (!appointments || !events) redirect('/')
 

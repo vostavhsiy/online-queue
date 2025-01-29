@@ -12,7 +12,8 @@ export const createCustomer = async (payload: CreateCustomerPayload) => {
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -25,7 +26,8 @@ export const updateCustomer = async (
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -35,6 +37,7 @@ export const deleteCustomer = async (id: string) => {
 		return res
 	} catch (error) {
 		console.log(error)
-		return null
+		//@ts-ignore
+		throw error.response?.data?.message || 'Произошла ошибка!'
 	}
 }

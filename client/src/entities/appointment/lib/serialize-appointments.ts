@@ -7,9 +7,11 @@ export const serializeAppointmentsFromEvent = (
 	events: EventWithRelations[]
 ) => {
 	try {
-		const appointments = events.reduce((acc, event) => {
-			return [...acc, ...event.appointments]
-		}, [] as AppointmentWithRelations[])
+		const appointments = events
+			.reduce((acc, event) => {
+				return [...acc, ...event.appointments]
+			}, [] as AppointmentWithRelations[])
+			.filter(appointment => !appointment.isFromSchedule)
 		const serializedAppointments: Array<
 			EventInput & { customer: Customer; event: Event }
 		> = appointments.map(appointment => {
