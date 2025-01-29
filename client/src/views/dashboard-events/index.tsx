@@ -3,11 +3,13 @@ import { EventCard } from '@/entities/event/ui'
 import { Button } from '@/shared/ui'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 const DashboardEvents = async () => {
 	// const company = await auth()
 	// if (!company) redirect('/api/auth/signin')
 	const events = await getAllEvents()
+	if (typeof events === 'string') redirect('/dashboard')
 
 	return (
 		<div className='mt-5 flex flex-col gap-4'>

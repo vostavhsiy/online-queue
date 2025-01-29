@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 
 const DashboardSettingsScreen = async () => {
 	const company = await auth()
-	if (!company) redirect('/')
+	if (typeof company === 'string' || !company) redirect('/')
 
 	return (
 		<div>

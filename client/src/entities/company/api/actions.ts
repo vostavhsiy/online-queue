@@ -52,7 +52,7 @@ export const auth = async () => {
 		const e = error as AxiosError
 		console.log(e.message)
 		//@ts-ignore
-		return error.response?.data?.message || 'Произошла ошибка!'
+		return 'Произошла ошибка!'
 	}
 }
 

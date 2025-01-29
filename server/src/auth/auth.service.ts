@@ -19,7 +19,10 @@ export class AuthService {
     console.log(email, name, password);
     const candidate = await this.companiesService.findOne(email);
     console.log(candidate);
-    if (candidate) throw new BadRequestException('Company already signed up!');
+    if (candidate)
+      throw new BadRequestException(
+        'Аккаунт с таким почтовым ящиком уже зарегистрирован!',
+      );
     const newCompany = await this.companiesService.create({
       email,
       name,

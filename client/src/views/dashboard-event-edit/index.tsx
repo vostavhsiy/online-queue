@@ -11,7 +11,7 @@ const DashboardEventsEdit: NextPage<Props> = async props => {
 	const params = await props.params
 
 	const event = await getEvent(params.id)
-	if (!event) notFound()
+	if (!event || typeof event === 'string') notFound()
 	return (
 		<div className='h-full'>
 			<EditEventForm event={event} />

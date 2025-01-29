@@ -16,7 +16,13 @@ const DashboardEvent: NextPage<Props> = async props => {
 
 	const event = await getEvent(params.id)
 	const events = await getAllEvents()
-	if (!event || !events) notFound()
+	if (
+		!event ||
+		typeof event === 'string' ||
+		!events ||
+		typeof events === 'string'
+	)
+		notFound()
 
 	const appointments =
 		!!event.schedule && !!event.schedule.times.length

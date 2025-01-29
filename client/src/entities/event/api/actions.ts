@@ -1,6 +1,12 @@
 'use server'
 
-import { CreateEventPayload, EventApi, UpdateEventPayload } from './api'
+import {
+	CreateEventPayload,
+	EventApi,
+	GetAllEventsResponse,
+	GetEventResponse,
+	UpdateEventPayload,
+} from './api'
 
 export const createEvent = async (payload: CreateEventPayload) => {
 	try {
@@ -13,7 +19,9 @@ export const createEvent = async (payload: CreateEventPayload) => {
 	}
 }
 
-export const getAllEvents = async () => {
+export const getAllEvents = async (): Promise<
+	GetAllEventsResponse | string
+> => {
 	try {
 		const res = await EventApi.getAll()
 		return res
@@ -24,7 +32,9 @@ export const getAllEvents = async () => {
 	}
 }
 
-export const getEvent = async (id: string) => {
+export const getEvent = async (
+	id: string
+): Promise<GetEventResponse | string> => {
 	try {
 		const res = await EventApi.getOne(id)
 		return res

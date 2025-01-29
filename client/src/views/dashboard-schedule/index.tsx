@@ -6,11 +6,12 @@ import { redirect } from 'next/navigation'
 
 const DashboardScheduleScreen = async () => {
 	const company = await auth()
-	if (!company) redirect('/signin')
+	if (!company || typeof company === 'string') redirect('/signin')
 	const appointments = serializeAppointmentsFromEvent(company.events) as any
 	if (!appointments) redirect('/')
 
 	const events = (await getAllEvents()) || []
+	if (typeof events === 'string') redirect('/')
 
 	return (
 		<>

@@ -9,7 +9,7 @@ import { redirect } from 'next/navigation'
 
 const DashboardEmailsUnmakeScreen = async () => {
 	const company = await auth()
-	if (!company?.emailHtml) redirect('/dashboard')
+	if (typeof company === 'string' || !company?.emailHtml) redirect('/dashboard')
 
 	const email = await getEmail(company.emailHtml.id)
 	if (!email) redirect('/dashboard')
