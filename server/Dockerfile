@@ -12,7 +12,7 @@ COPY . .
 COPY .env .
 
 RUN npx prisma generate
-RUN npx prisma migrate deploy
+# RUN npx prisma migrate deploy
 
 RUN npm run build
 EXPOSE 3000
