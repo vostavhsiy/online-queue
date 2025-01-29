@@ -16,7 +16,7 @@ export const signUp = async (payload: SignUpPayload) => {
 	} catch (error) {
 		console.log(error)
 		//@ts-ignore
-		throw error.response?.data?.message || 'Произошла ошибка!'
+		return error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -27,7 +27,7 @@ export const signIn = async (payload: SignInPayload) => {
 	} catch (error) {
 		console.log(error)
 		//@ts-ignore
-		throw error.response?.data?.message || 'Произошла ошибка!'
+		return error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -40,7 +40,7 @@ export const signInWithOAuth = async (
 	} catch (error) {
 		console.log(error)
 		//@ts-ignore
-		throw error.response?.data?.message || 'Произошла ошибка!'
+		return error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -52,7 +52,7 @@ export const auth = async () => {
 		const e = error as AxiosError
 		console.log(e.message)
 		//@ts-ignore
-		throw error.response?.data?.message || 'Произошла ошибка!'
+		return error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -69,6 +69,6 @@ export const updateCompany = async (
 	} catch (error) {
 		console.log(error)
 		//@ts-ignore
-		throw error.response?.data?.message || 'Произошла ошибка!'
+		return error.response?.data?.message || 'Произошла ошибка!'
 	}
 }

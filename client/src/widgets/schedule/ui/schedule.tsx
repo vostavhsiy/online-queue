@@ -28,6 +28,7 @@ import FullCalendar from '@fullcalendar/react'
 import rrulePlugin from '@fullcalendar/rrule'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import { FC, useEffect, useRef, useState } from 'react'
+import { toast } from 'sonner'
 
 type ScheduleAppointment = EventInput & { customer: Customer; event: Event }
 
@@ -111,7 +112,8 @@ const Schedule: FC<Props> = ({ appointments, events }) => {
 			duration: { from: appointmentStartTime, to: appointmentEndTime },
 			eventId: newEventId,
 		}).then(res => {
-			if (!res) return
+			if (!res || typeof res === 'string')
+				return toast.error(res || 'Произошла ошибка. Попробуйте позже.')
 			handleCloseAddAppointmentDialog()
 		})
 	}
@@ -131,7 +133,8 @@ const Schedule: FC<Props> = ({ appointments, events }) => {
 			duration: { from: appointmentStartTime, to: appointmentEndTime },
 			eventId: selectedEventId,
 		}).then(res => {
-			if (!res) return
+			if (!res || typeof res === 'string')
+				return toast.error(res || 'Произошла ошибка. Попробуйте позже.')
 			handleCloseUpdateAppointmentDialog()
 		})
 	}

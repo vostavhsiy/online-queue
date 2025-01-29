@@ -3,7 +3,6 @@
 import { updateEmail } from '@/entities/email/api'
 import { Button } from '@/shared/ui'
 import { Editor } from '@tinymce/tinymce-react'
-import { AxiosError } from 'axios'
 import * as hbs from 'handlebars'
 import { RotateCcw } from 'lucide-react'
 import { FC, useEffect, useRef, useState, useTransition } from 'react'
@@ -59,8 +58,9 @@ const EmailEditor: FC<Props> = ({
 					emailId,
 					isUnmake ? { unmakeCustomHtml: html } : { makeCustomHtml: html }
 				)
-				console.log(res)
-				toast.success('Сохранено!')
+				if (!res || typeof res === 'string')
+					toast.error(res || 'Произошла ошибка. Попробуйте позже.')
+				else toast.success('Сохранено!')
 			} catch (error) {
 				//@ts-ignore
 				toast.error(error.message)
@@ -75,8 +75,12 @@ const EmailEditor: FC<Props> = ({
 					emailId,
 					isUnmake ? { unmakeCustomHtml: null } : { makeCustomHtml: null }
 				)
-				setPreviewHtml(emailHtml)
-				editorRef.current?.setContent(emailMarkup)
+				if (!res || typeof res === 'string')
+					toast.error(res || 'Произошла ошибка. Попробуйте позже.')
+				else {
+					setPreviewHtml(emailHtml)
+					editorRef.current?.setContent(emailMarkup)
+				}
 			} catch (error) {
 				//@ts-ignore
 				toast.error(error.message)

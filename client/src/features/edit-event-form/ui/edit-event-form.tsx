@@ -113,8 +113,12 @@ const EditEventForm: FC<Props> = ({ event }) => {
 						  }
 						: undefined,
 				})
-				router.push(`/dashboard/events/${event.id}`)
-				toast.success('Мероприятие обновлено!')
+				if (!res || typeof res === 'string')
+					toast.error(res || 'Произошла ошибка. Попробуйте позже.')
+				else {
+					router.push(`/dashboard/events/${event.id}`)
+					toast.success('Мероприятие обновлено!')
+				}
 			} catch (error) {
 				//@ts-ignore
 				toast.error(error.message)
@@ -125,9 +129,13 @@ const EditEventForm: FC<Props> = ({ event }) => {
 	const handleDelete = () => {
 		startTransition(async () => {
 			try {
-				await deleteEvent(event.id)
-				router.push(`/dashboard/events`)
-				toast.success('Мероприятие удалено!')
+				const res = await deleteEvent(event.id)
+				if (!res || typeof res === 'string')
+					toast.error(res || 'Произошла ошибка. Попробуйте позже.')
+				else {
+					router.push(`/dashboard/events`)
+					toast.success('Мероприятие удалено!')
+				}
 			} catch (error) {
 				//@ts-ignore
 				toast.error(error.message)

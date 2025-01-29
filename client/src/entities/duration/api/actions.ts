@@ -9,7 +9,7 @@ export const createDuration = async (payload: CreateDurationPayload) => {
 	} catch (error) {
 		console.log(error)
 		//@ts-ignore
-		throw error.response?.data?.message || 'Произошла ошибка!'
+		return error.response?.data?.message || 'Произошла ошибка!'
 	}
 }
 
@@ -20,6 +20,6 @@ export const deleteDuration = async (id: string) => {
 	} catch (error) {
 		console.log(error)
 		//@ts-ignore
-		throw error.response?.data?.message || 'Произошла ошибка!'
+		return error.response?.data?.message || 'Произошла ошибка!'
 	}
 }

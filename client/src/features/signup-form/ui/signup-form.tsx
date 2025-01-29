@@ -21,8 +21,12 @@ const SignUpForm = () => {
 		startTransition(async () => {
 			try {
 				const res = await signUp({ email, name, password })
-				router.push('/signin')
-				toast.success('Регистрация выполнена!')
+				if (!res || typeof res === 'string')
+					toast.error(res || 'Произошла ошибка. Попробуйте позже.')
+				else {
+					router.push('/signin')
+					toast.success('Регистрация выполнена!')
+				}
 			} catch (error) {
 				//@ts-ignore
 				toast.error(error.message)
