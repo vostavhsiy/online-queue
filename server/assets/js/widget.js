@@ -187,11 +187,11 @@ class Widget {
       const root = document.getElementById('online-queue-calendar');
       root.innerHTML = '';
       const script = document.createElement('script');
-      script.src = 'https://online-queue.ru/server/js/full-calendar.js';
+      script.src = 'https://online-queue.ru/server/static/js/full-calendar.js';
       script.setAttribute('defer', true);
       document.head.appendChild(script);
       const localeScript = document.createElement('script');
-      localeScript.src = `https://online-queue.ru/server/js/ru.global.js`;
+      localeScript.src = `https://online-queue.ru/server/static/js/ru.global.js`;
       localeScript.setAttribute('defer', true);
       document.head.appendChild(localeScript);
     } catch (error) {
