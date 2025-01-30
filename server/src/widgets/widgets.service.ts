@@ -5,6 +5,8 @@ import {
 } from '@nestjs/common';
 import * as hbs from 'express-handlebars';
 import { Prisma } from 'generated';
+import * as moment from 'moment';
+import { Frequency, RRule, RRuleSet } from 'rrule';
 import { LibService } from 'src/lib/lib.service';
 import { DbService } from './../db/db.service';
 import { CreateWidgetDto } from './dto/create-widget.dto';
@@ -49,6 +51,7 @@ export class WidgetsService {
         name: widget.company.name,
         email: widget.company.email,
         events: widget.company.events,
+        apiUrl: process.env.API_URL,
       };
       if (widget.customHtml) {
         const template = this.engine.handlebars.compile(widget.customHtml, {});
@@ -74,12 +77,10 @@ export class WidgetsService {
               events: {
                 include: {
                   appointments: {
-                    where: {
-                      customer: null,
-                    },
                     include: {
                       duration: true,
                       event: true,
+                      customer: true,
                     },
                   },
                 },
@@ -89,7 +90,6 @@ export class WidgetsService {
         },
       });
       const events = await this.dbService.event.findMany();
-
       const appointments = this.serializedAppointments(widget.company.events);
       return appointments;
     } catch (error) {
@@ -144,56 +144,76 @@ export class WidgetsService {
       const appointments = events.reduce((acc, event) => {
         return [...acc, ...event.appointments];
       }, []);
-      const serializedAppointments = appointments.map((appointment) => {
-        const start = new Date(appointment.date);
-        start.setHours(+appointment.duration.from.split(':')[0]);
-        start.setMinutes(+appointment.duration.from.split(':')[1]);
+      const serializedAppointments = appointments
+        .filter((app) => !app.customer)
+        .map((appointment) => {
+          const start = new Date(appointment.date);
+          start.setHours(+appointment.duration.from.split(':')[0]);
+          start.setMinutes(+appointment.duration.from.split(':')[1]);
 
-        const end = new Date(appointment.date);
-        end.setHours(+appointment.duration.to.split(':')[0]);
-        end.setMinutes(+appointment.duration.to.split(':')[1]);
+          const end = new Date(appointment.date);
+          end.setHours(+appointment.duration.to.split(':')[0]);
+          end.setMinutes(+appointment.duration.to.split(':')[1]);
 
-        const rrule =
-          appointment.weekDay != undefined
-            ? {
-                freq: 'weekly',
+          let rruleSet;
+          if (appointment.weekDay != undefined) {
+            rruleSet = new RRuleSet();
+            rruleSet.rrule(
+              new RRule({
+                freq: Frequency.WEEKLY,
                 interval: 1,
                 byweekday: appointment.weekDay,
-                dtstart: start.toISOString(),
-              }
-            : undefined;
+                dtstart: new Date(moment(start).format('YYYY-MM-DDTHH:mm:ss')),
+              }),
+            );
+            appointments
+              .filter((app) => app.customer)
+              .forEach((app) => {
+                rruleSet.exdate(
+                  new Date(
+                    moment(app.date)
+                      .set({
+                        hour: start.getHours(),
+                        minute: start.getMinutes(),
+                        second: start.getSeconds(),
+                      })
+                      .format('YYYY-MM-DDTHH:mm:ss'),
+                  ),
+                );
+              });
+          }
 
-        console.log(rrule);
+          const rrule = rruleSet?.toString();
 
-        const startTime = {
-          hours: +appointment.duration.from.split(':')[0],
-          minutes: +appointment.duration.from.split(':')[1],
-        };
+          const startTime = {
+            hours: +appointment.duration.from.split(':')[0],
+            minutes: +appointment.duration.from.split(':')[1],
+          };
 
-        const endTime = {
-          hours: +appointment.duration.to.split(':')[0],
-          minutes: +appointment.duration.to.split(':')[1],
-        };
+          const endTime = {
+            hours: +appointment.duration.to.split(':')[0],
+            minutes: +appointment.duration.to.split(':')[1],
+          };
 
-        const durationMinutes =
-          endTime.hours * 60 +
-          endTime.minutes -
-          startTime.hours * 60 -
-          startTime.minutes;
+          const durationMinutes =
+            endTime.hours * 60 +
+            endTime.minutes -
+            startTime.hours * 60 -
+            startTime.minutes;
 
-        return {
-          id: appointment.id,
-          title: appointment.event.name,
-          start,
-          end,
-          duration: {
-            minutes: durationMinutes,
-          },
-          rrule,
-          event: appointment.event,
-          customer: appointment.customer,
-        } as any;
-      });
+          return {
+            id: appointment.id,
+            title: appointment.event.name,
+            start: new Date(moment(start).format('YYYY-MM-DDTHH:mm:ss')),
+            end,
+            duration: {
+              minutes: durationMinutes,
+            },
+            rrule,
+            event: appointment.event,
+            customer: appointment.customer,
+          } as any;
+        });
       return serializedAppointments;
     } catch (error) {
       console.log(error);

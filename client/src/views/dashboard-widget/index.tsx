@@ -11,8 +11,6 @@ const DashboardWidgetScreen = async () => {
 	const widget = await getWidget(company.widget.id)
 	if (!widget) redirect('/dashboard')
 
-	console.log(widget.html)
-
 	return (
 		<div>
 			<p className='text-3xl mt-5 mb-4'>Настройки виджета</p>

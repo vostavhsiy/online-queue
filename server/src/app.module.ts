@@ -28,7 +28,7 @@ import { WidgetsModule } from './widgets/widgets.module';
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'assets'),
-      serveRoot: "/server/static"
+      serveRoot: "/server/static",
     }),
     ClsModule.forRoot({
       plugins: [

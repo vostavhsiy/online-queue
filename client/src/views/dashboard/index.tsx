@@ -16,8 +16,9 @@ const DashboardScreen = async () => {
 			[] as AppointmentWithRelations[]
 		)
 	).filter(appointment => {
-		if (!appointment.time) return false
+		if (appointment.timeId) return false
 		if (appointment.isFromSchedule && !appointment.customer) return false
+		return true
 	})
 	const events = await getAllEvents()
 	if (!appointments || !events || typeof events === 'string') redirect('/')
