@@ -56,7 +56,7 @@ export const serializeAppointmentsFromEvent = (
 			return {
 				id: appointment.id,
 				title: appointment.event.name,
-				start,
+				start: moment(start).format('YYYY-MM-DDTHH:mm:ss'),
 				end,
 				duration: {
 					minutes: durationMinutes,
