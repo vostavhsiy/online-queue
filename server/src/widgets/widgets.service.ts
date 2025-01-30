@@ -187,7 +187,12 @@ export class WidgetsService {
               });
           }
 
-          const rrule = rruleSet?.toString();
+          const rrule = rruleSet?.toString() && {
+            freq: Frequency.WEEKLY,
+            interval: 1,
+            byweekday: appointment.weekDay,
+            dtstart: moment(start).format('YYYY-MM-DDTHH:mm:00'),
+          };
 
           const startTime = {
             hours: +appointment.duration.from.split(':')[0],
@@ -213,6 +218,17 @@ export class WidgetsService {
             duration: {
               minutes: durationMinutes,
             },
+            exdate: appointments
+              .filter((app) => app.customer)
+              .map((app) => {
+                return moment(app.date)
+                  .set({
+                    hour: start.getHours(),
+                    minute: start.getMinutes(),
+                    second: start.getSeconds(),
+                  })
+                  .format('YYYY-MM-DDTHH:mm:00');
+              }),
             rrule,
             event: appointment.event,
             customer: appointment.customer,

@@ -57,6 +57,7 @@ class Widget {
               this.appointments = data;
               calendarRoot.innerHTML = '';
               console.log(data[0].start, new Date(data[0].start));
+              console.log(data);
               const calendar = new FullCalendar.Calendar(calendarRoot, {
                 initialView: 'dayGridMonth',
                 locale: 'ru',
