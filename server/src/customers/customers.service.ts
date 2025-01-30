@@ -24,17 +24,22 @@ export class CustomersService {
       const appointment = await this.dbService.appointment.findUnique({
         where: { id: createCustomerDto.appointmentId },
       });
+      console.log('appointment', appointment);
+      if (appointment.customerId) throw 'Занято!';
       let newAppointment;
-      if (createCustomerDto.info) {
+      if (appointment.timeId && createCustomerDto.info) {
+        const [day, month, year] = createCustomerDto.info.date.split('.');
+        const date = new Date(`${year}-${month}-${day}`);
         newAppointment = await this.dbService.appointment.create({
           data: {
-            date: new Date(createCustomerDto.info.date),
+            date,
             durationId: appointment.durationId,
             eventId: appointment.eventId,
             isFromSchedule: true,
           },
         });
       }
+      console.log('newAppointment', newAppointment);
       const { info, ...dto } = createCustomerDto;
       const customer = await this.txHost.tx.customer.create({
         data: { ...dto, appointmentId: newAppointment?.id || appointment.id },
@@ -55,6 +60,7 @@ export class CustomersService {
           },
         },
       });
+      console.log('customer', customer);
       await this.mailService.sendCustomerAppointment(
         customer.appointment.event.company.name,
         customer.appointment.event.company.emailHtml,

@@ -1,8 +1,8 @@
 class Widget {
   rootId = 'queue-widget';
 
-  url_widget = 'https://online-queue.ru/server/widgets/';
-  url_style = 'https://online-queue.ru/server/static/css/style.css';
+  url_widget = 'http://localhost:3000/server/widgets/';
+  url_style = 'http://localhost:3000/server/static/css/style.css';
   appointments = [];
 
   currentEvent;
@@ -188,20 +188,20 @@ class Widget {
       const root = document.getElementById('online-queue-calendar');
       root.innerHTML = '';
       const rruleScript = document.createElement('script');
-      rruleScript.src = 'https://online-queue.ru/server/static/js/rrule.min.js';
+      rruleScript.src = 'http://localhost:3000/server/static/js/rrule.min.js';
       rruleScript.setAttribute('defer', true);
       document.head.appendChild(rruleScript);
       const script = document.createElement('script');
-      script.src = 'https://online-queue.ru/server/static/js/full-calendar.js';
+      script.src = 'http://localhost:3000/server/static/js/full-calendar.js';
       script.setAttribute('defer', true);
       document.head.appendChild(script);
       const rruleConnectorScript = document.createElement('script');
       rruleConnectorScript.src =
-        'https://online-queue.ru/server/static/js/index.global.min.js';
+        'http://localhost:3000/server/static/js/index.global.min.js';
       rruleConnectorScript.setAttribute('defer', true);
       document.head.appendChild(rruleConnectorScript);
       const localeScript = document.createElement('script');
-      localeScript.src = `https://online-queue.ru/server/static/js/ru.global.js`;
+      localeScript.src = `http://localhost:3000/server/static/js/ru.global.js`;
       localeScript.setAttribute('defer', true);
       document.head.appendChild(localeScript);
     } catch (error) {

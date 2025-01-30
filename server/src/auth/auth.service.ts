@@ -16,9 +16,7 @@ export class AuthService {
   ) {}
 
   async signUp(email: string, name: string, password: string) {
-    console.log(email, name, password);
     const candidate = await this.companiesService.findOne(email);
-    console.log(candidate);
     if (candidate)
       throw new BadRequestException(
         'Аккаунт с таким почтовым ящиком уже зарегистрирован!',
