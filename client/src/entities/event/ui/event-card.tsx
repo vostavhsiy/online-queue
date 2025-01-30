@@ -35,8 +35,8 @@ export const EventCard: FC<Props> = ({ event }) => {
 				</div>
 			</div>
 			<span className='block mb-2 text-lg text-primary/60'>
-				{event.appointments.length}{' '}
-				{getWordEnding(event.appointments.length, [
+				{event.appointments.filter(app => !app.time).length}{' '}
+				{getWordEnding(event.appointments.filter(app => !app.time).length, [
 					'запись',
 					'записи',
 					'записей',
