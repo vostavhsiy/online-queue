@@ -1,6 +1,7 @@
 import { Customer } from '@/entities/customer/model'
 import { EventWithRelations } from '@/entities/event/model'
 import { EventInput } from '@fullcalendar/core'
+import moment from 'moment'
 import { AppointmentWithRelations } from '../model'
 
 export const serializeAppointmentsFromEvent = (
@@ -37,7 +38,7 @@ export const serializeAppointmentsFromEvent = (
 			start.setMinutes(startTime.minutes)
 			start.setSeconds(0)
 
-			console.log('start', start)
+			console.log('start', start, moment(start).format('YYYY-MM-DDTHH:mm:ss'))
 
 			const end = new Date(appointment.date)
 			end.setMinutes(start.getMinutes() + durationMinutes)
@@ -48,7 +49,7 @@ export const serializeAppointmentsFromEvent = (
 							freq: 'weekly',
 							interval: 1,
 							byweekday: appointment.weekDay,
-							dtstart: start.toISOString(),
+							dtstart: moment(start).format('YYYY-MM-DDTHH:mm:ss'),
 					  }
 					: undefined
 
