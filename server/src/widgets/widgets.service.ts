@@ -153,7 +153,7 @@ export class WidgetsService {
           start.setMinutes(+appointment.duration.from.split(':')[1]);
           console.log(
             'start',
-            new Date(moment(start).format('YYYY-MM-DDTHH:mm:ss')),
+            new Date(moment(start).format('YYYY-MM-DDTHH:mm:00')),
           );
           const end = new Date(appointment.date);
           end.setHours(+appointment.duration.to.split(':')[0]);
@@ -167,7 +167,7 @@ export class WidgetsService {
                 freq: Frequency.WEEKLY,
                 interval: 1,
                 byweekday: appointment.weekDay,
-                dtstart: new Date(moment(start).format('YYYY-MM-DDTHH:mm:ss')),
+                dtstart: new Date(moment(start).format('YYYY-MM-DDTHH:mm:00')),
               }),
             );
             appointments
@@ -181,7 +181,7 @@ export class WidgetsService {
                         minute: start.getMinutes(),
                         second: start.getSeconds(),
                       })
-                      .format('YYYY-MM-DDTHH:mm:ss'),
+                      .format('YYYY-MM-DDTHH:mm:00'),
                   ),
                 );
               });
@@ -208,8 +208,8 @@ export class WidgetsService {
           return {
             id: appointment.id,
             title: appointment.event.name,
-            start: new Date(moment(start).format('YYYY-MM-DDTHH:mm:ss')),
-            end,
+            start: new Date(moment(start).format('YYYY-MM-DDTHH:mm:00')),
+            end: new Date(moment(end).format('YYYY-MM-DDTHH:mm:00')),
             duration: {
               minutes: durationMinutes,
             },
