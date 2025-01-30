@@ -208,8 +208,8 @@ export class WidgetsService {
           return {
             id: appointment.id,
             title: appointment.event.name,
-            start: new Date(moment(start).format('YYYY-MM-DDTHH:mm:00')),
-            end: new Date(moment(end).format('YYYY-MM-DDTHH:mm:00')),
+            start: moment(start).format('YYYY-MM-DDTHH:mm:00'),
+            end: moment(end).format('YYYY-MM-DDTHH:mm:00'),
             duration: {
               minutes: durationMinutes,
             },
