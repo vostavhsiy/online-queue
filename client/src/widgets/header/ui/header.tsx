@@ -39,7 +39,7 @@ export const Header = () => {
 						href={'/#contacts'}
 						className='text-sm mr-8 transition-all text-primary/60 hover:text-accent'
 					>
-						Контакты
+						Обратная связь
 					</Link>
 					<Link
 						href={'/privacy'}
