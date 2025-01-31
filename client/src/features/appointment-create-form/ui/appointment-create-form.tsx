@@ -31,7 +31,6 @@ export const AppointmentCreateForm: FC<Props> = ({
 		startTransition(async () => {
 			try {
 				await submit(data)
-				toast.success('Запись добавлена!')
 			} catch (error) {
 				//@ts-ignore
 				toast.error(error.message)

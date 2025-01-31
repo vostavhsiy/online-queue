@@ -70,7 +70,6 @@ export const AppointmentUpdateForm: FC<Props> = ({
 		startTransition(async () => {
 			try {
 				await submit(data)
-				toast.success('Запись обновлена!')
 			} catch (error) {
 				//@ts-ignore
 				toast.error(error.message)

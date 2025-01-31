@@ -114,6 +114,7 @@ const Schedule: FC<Props> = ({ appointments, events }) => {
 		}).then(res => {
 			if (!res || typeof res === 'string')
 				return toast.error(res || 'Произошла ошибка. Попробуйте позже.')
+			else toast.success('Запись добавлена!')
 			handleCloseAddAppointmentDialog()
 		})
 	}
@@ -135,6 +136,7 @@ const Schedule: FC<Props> = ({ appointments, events }) => {
 		}).then(res => {
 			if (!res || typeof res === 'string')
 				return toast.error(res || 'Произошла ошибка. Попробуйте позже.')
+			else toast.success('Запись обновлена')
 			handleCloseUpdateAppointmentDialog()
 		})
 	}

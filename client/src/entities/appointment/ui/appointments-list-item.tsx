@@ -58,6 +58,7 @@ export const AppointmentsListItem: FC<Props> = ({ appointment, events }) => {
 		}).then(res => {
 			if (!res || typeof res === 'string')
 				return toast.error(res || 'Произошла ошибка. Попробуйте позже.')
+			else toast.success("Запись обновлена")
 			handleCloseUpdateAppointmentDialog()
 		})
 	}
