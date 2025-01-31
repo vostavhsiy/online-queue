@@ -14,9 +14,9 @@ import {
 } from '@/shared/ui'
 import { Edit2 } from 'lucide-react'
 import { FC, useState } from 'react'
+import { toast } from 'sonner'
 import { updateAppointment } from '../api/actions'
 import { AppointmentWithRelations } from '../model'
-import { toast } from 'sonner'
 
 interface Props {
 	appointment: AppointmentWithRelations
@@ -58,6 +58,7 @@ export const AppointmentCard: FC<Props> = ({ appointment, events }) => {
 		}).then(res => {
 			if (!res || typeof res === 'string')
 				return toast.error(res || 'Произошла ошибка. Попробуйте позже.')
+			else toast.success('Запись обновлена')
 			handleCloseUpdateAppointmentDialog()
 		})
 	}
