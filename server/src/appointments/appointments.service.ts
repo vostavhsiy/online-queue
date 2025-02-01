@@ -72,6 +72,7 @@ export class AppointmentsService {
         where: { id },
         data: {
           ...appointmentDto,
+          date: new Date(appointmentDto.date),
           durationId: duration.id,
         },
       });

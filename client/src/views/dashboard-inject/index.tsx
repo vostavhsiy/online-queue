@@ -23,6 +23,14 @@ const DashboardInjectScreen = async () => {
 			</div>
 			<Separator className='my-10' />
 			<div className='flex flex-col gap-3'>
+				<p>
+					Подключите необходимые для виджета стили - вставьте подключение в тег
+					head.
+				</p>
+				<Code title='CSS'>{`<link rel='stylesheet' href='${process.env.INJECT_API_URL}/style.css'/>`}</Code>
+			</div>
+			<Separator className='my-10' />
+			<div className='flex flex-col gap-3'>
 				<p>Добавьте этот скрипт на ваш сайт.</p>
 				<WidgetCode widgetId={company.widget.id} />
 			</div>

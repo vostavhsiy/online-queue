@@ -3,6 +3,9 @@
 /node_modules
 /build
 
+/widget-react/node_modules
+/widget-react/yarn.lock
+
 # Logs
 logs
 *.log

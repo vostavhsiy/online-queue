@@ -66,6 +66,10 @@
 		cursor: pointer !important;
 	}
 
+	.fc .fc-daygrid-day.fc-day-today {
+		background: rgba(191, 204, 255, 0.5) !important;
+	}
+
 	.online-queue-widget__inner {
 		max-width: 800px !important;
 		position: relative !important;
@@ -85,10 +89,13 @@
 		font-size: 1.5rem !important;
 		font-weight: 600 !important;
 		margin-bottom: 10px !important;
+		text-align: center !important;
 	}
 
 	.online-queue-widget__text {
-		font-size: 0.9rem !important;
+		font-size: 1.1rem !important;
+		color: rgb(57, 96, 255) !important;
+		text-align: center !important;
 	}
 
 	#online-queue-form {
@@ -207,8 +214,9 @@
 
 	.online-queue-widget__select details {
 		position: relative;
-		width: 300px;
-		margin-right: 1rem;
+		width: 400px;
+		max-width: 100%;
+		margin: 0 auto;
 	}
 
 	.online-queue-widget__select details[open] {
