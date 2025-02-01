@@ -152,6 +152,7 @@ const WidgetEditor: FC<Props> = ({ widgetHtml, widgetId }) => {
 							promotion: false,
 							statusbar: false,
 							menubar: false,
+							xss_sanitization: false,
 							highlight_on_focus: false,
 							plugins:
 								'anchor autolink charmap codesample emoticons link lists searchreplace table visualblocks code preview',
