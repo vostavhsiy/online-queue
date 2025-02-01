@@ -25,7 +25,6 @@ export const serializeAppointmentsFromEvent = (
 				hours: +appointment.duration.to.split(':')[0],
 				minutes: +appointment.duration.to.split(':')[1],
 			}
-			console.log('time', startTime, endTime)
 
 			const durationMinutes =
 				endTime.hours * 60 +
@@ -38,13 +37,9 @@ export const serializeAppointmentsFromEvent = (
 			start.setMinutes(startTime.minutes)
 			start.setSeconds(0)
 
-			console.log('start', start, moment(start).format('YYYY-MM-DDTHH:mm:ss'))
-
 			const end = moment(start)
 				.add(durationMinutes, 'minutes')
 				.format('YYYY-MM-DDTHH:mm:ss')
-
-			console.log('end', end)
 
 			const rrule =
 				appointment.weekDay != undefined

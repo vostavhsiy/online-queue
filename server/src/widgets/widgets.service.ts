@@ -147,18 +147,14 @@ export class WidgetsService {
       const serializedAppointments = appointments
         .filter((app) => !app.customer)
         .map((appointment) => {
-          console.log('appointment', appointment);
           const start = new Date(appointment.date);
           start.setHours(+appointment.duration.from.split(':')[0]);
           start.setMinutes(+appointment.duration.from.split(':')[1]);
-          console.log(
-            'start',
-            new Date(moment(start).format('YYYY-MM-DDTHH:mm:00')),
-          );
+
           const end = new Date(appointment.date);
           end.setHours(+appointment.duration.to.split(':')[0]);
           end.setMinutes(+appointment.duration.to.split(':')[1]);
-          console.log('end', end);
+
           let rruleSet;
           if (appointment.weekDay != undefined) {
             rruleSet = new RRuleSet();
