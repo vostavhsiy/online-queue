@@ -8,6 +8,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import { Editor } from '@tinymce/tinymce-react'
 import { RotateCcw } from 'lucide-react'
 import { FC, useEffect, useRef, useState } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
 	widgetId: string
@@ -59,7 +60,7 @@ const WidgetEditor: FC<Props> = ({ widgetHtml, widgetId }) => {
 		if (!html) return
 		updateWidget(widgetId, { customHtml: html }).then(res => {
 			setFormMode(false)
-			console.log(res)
+			toast.success('Виджет сохранен!')
 		})
 	}
 
@@ -68,7 +69,7 @@ const WidgetEditor: FC<Props> = ({ widgetHtml, widgetId }) => {
 		setPreviewHtml(widgetHtml)
 		updateWidget(widgetId, { customHtml: null }).then(res => {
 			setFormMode(false)
-			console.log(res)
+			toast.success('Виджет возвращен к начальному виду!')
 		})
 	}
 
