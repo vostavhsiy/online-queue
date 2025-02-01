@@ -28,6 +28,8 @@ const SignInForm = () => {
 				res?.ok && toast.success('Вход выполнен!')
 			} catch (error) {
 				//@ts-ignore
+				console.log(error, error.message)
+				//@ts-ignore
 				toast.error('Произошла ошибка! Попробуйте снова.')
 			}
 		})
