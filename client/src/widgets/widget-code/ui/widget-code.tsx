@@ -9,12 +9,12 @@ interface Props {
 export const WidgetCode: FC<Props> = ({ widgetId, specId }) => {
 	return (
 		<Code title='JavaScript'>
-			{`<script src="${
-				process.env.INJECT_API_URL
-			}/js/widget.js" type="text/javascript"></script>
-			<script type='text/javascript'>new Widget('${widgetId}').init(${
-				specId ? '< ваш id в разметке >' : ''
-			})</script>`}
+			{`<script src="${process.env.INJECT_API_URL}/index.js"></script>
+			<script type='text/javascript'>
+				renderQueueWidget(${
+					specId ? '< ваш id в разметке >' : "'queue-widget'"
+				}, '${widgetId}')
+			</script>`}
 		</Code>
 	)
 }
