@@ -47,7 +47,7 @@ export const BackForm = () => {
 		setTimeout(() => {
 			setPending(false)
 			toast.success('Сообщение успешно отправлено', {
-				description: 'Спасибо за обратную связь',
+				description: 'Спасибо за обратную связь. В ближайшее время мы свяжемся с вами!',
 			})
 		}, 1000)
 	}
