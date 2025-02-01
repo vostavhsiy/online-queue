@@ -17,6 +17,7 @@ const LogoutButton: FC<Props> = ({ isIcon }) => {
 		startTransition(() =>
 			signOut({ callbackUrl: '/' })
 				.catch(error => {
+					console.log(error, error.message)
 					//@ts-ignore
 					toast.error(error.message)
 				})
