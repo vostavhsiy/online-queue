@@ -8,7 +8,7 @@ import { FC, useEffect, useRef, useState } from 'react';
 import Loader from '../Loader/Loader';
 import styles from './Widget.module.css';
 
-const apiUrl = 'http://localhost:3000/server';
+const apiUrl = 'https://online-queue.ru/server';
 
 interface Props {
   widgetId?: string;
@@ -142,12 +142,12 @@ const Widget: FC<Props> = ({ widgetId }) => {
                 (app: any) => app.event.id === eventId,
               );
               if (appointments) {
-                calendar.removeAllEvents()
-                calendar.addEventSource(appointments)
-                calendar.refetchEvents()
+                calendar.removeAllEvents();
+                calendar.addEventSource(appointments);
+                calendar.refetchEvents();
                 // calendar.batchRendering(() => {
-                  // calendar.getEvents().forEach((event) => event.remove());
-                  // calendar.addEventSource(appointments);
+                // calendar.getEvents().forEach((event) => event.remove());
+                // calendar.addEventSource(appointments);
                 // });
               }
             }
