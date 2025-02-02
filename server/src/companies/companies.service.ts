@@ -14,7 +14,7 @@ export class CompaniesService {
   ) {}
 
   async findOne(email: string) {
-    const company = this.dbService.company.findUnique({
+    const company = await this.dbService.company.findUnique({
       where: {
         email,
       },
@@ -30,6 +30,7 @@ export class CompaniesService {
         },
       },
     });
+    company.widget.customHtml = JSON.stringify(company.widget.customHtml);
     return company;
   }
 
