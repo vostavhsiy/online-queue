@@ -113,7 +113,7 @@ const EditEventForm: FC<Props> = ({ event }) => {
 						  }
 						: undefined,
 				})
-				if (!res || typeof res === 'string')
+				if (!res || typeof res === 'string' || Array.isArray(res))
 					toast.error(res || 'Произошла ошибка. Попробуйте позже.')
 				else {
 					router.push(`/dashboard/events/${event.id}`)
@@ -130,7 +130,7 @@ const EditEventForm: FC<Props> = ({ event }) => {
 		startTransition(async () => {
 			try {
 				const res = await deleteEvent(event.id)
-				if (!res || typeof res === 'string')
+				if (!res || typeof res === 'string' || Array.isArray(res))
 					toast.error(res || 'Произошла ошибка. Попробуйте позже.')
 				else {
 					router.push(`/dashboard/events`)

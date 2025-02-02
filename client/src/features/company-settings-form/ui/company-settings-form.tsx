@@ -43,7 +43,7 @@ export const CompanySettingsForm: FC<Props> = ({ company }) => {
 		startTransition(async () => {
 			try {
 				const res = await updateCompany(company.id, payload)
-				if (!res || typeof res === 'string')
+				if (!res || typeof res === 'string' || Array.isArray(res))
 					toast.error(res || 'Произошла ошибка. Попробуйте позже.')
 				else toast.success('Настройки сохранены!')
 			} catch (error) {

@@ -21,6 +21,7 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('login')
   signIn(@Body() signInDto: SignInDto) {
+    console.log(signInDto);
     return this.authService.signIn(signInDto.email, signInDto.password);
   }
 
@@ -35,6 +36,7 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('signup')
   signUp(@Body() signUpDto: SignUpDto) {
+    console.log(signUpDto);
     return this.authService.signUp(
       signUpDto.email,
       signUpDto.name,

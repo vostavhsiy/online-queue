@@ -112,7 +112,7 @@ const Schedule: FC<Props> = ({ appointments, events }) => {
 			duration: { from: appointmentStartTime, to: appointmentEndTime },
 			eventId: newEventId,
 		}).then(res => {
-			if (!res || typeof res === 'string')
+			if (!res || typeof res === 'string' || Array.isArray(res))
 				return toast.error(res || 'Произошла ошибка. Попробуйте позже.')
 			else toast.success('Запись добавлена!')
 			handleCloseAddAppointmentDialog()
@@ -134,7 +134,7 @@ const Schedule: FC<Props> = ({ appointments, events }) => {
 			duration: { from: appointmentStartTime, to: appointmentEndTime },
 			eventId: selectedEventId,
 		}).then(res => {
-			if (!res || typeof res === 'string')
+			if (!res || typeof res === 'string' || Array.isArray(res))
 				return toast.error(res || 'Произошла ошибка. Попробуйте позже.')
 			else toast.success('Запись обновлена')
 			handleCloseUpdateAppointmentDialog()

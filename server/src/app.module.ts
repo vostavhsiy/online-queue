@@ -19,6 +19,7 @@ import { DurationsModule } from './durations/durations.module';
 import { EmailsModule } from './emails/emails.module';
 import { EventsModule } from './events/events.module';
 import { LibModule } from './lib/lib.module';
+import { LocalizationModule } from './localization/localization.module';
 import { MailModule } from './mail/mail.module';
 import { SchedulesModule } from './schedules/schedules.module';
 import { TimesModule } from './times/times.module';
@@ -28,7 +29,7 @@ import { WidgetsModule } from './widgets/widgets.module';
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'assets'),
-      serveRoot: "/server/static",
+      serveRoot: '/server/static',
     }),
     ClsModule.forRoot({
       plugins: [
@@ -53,6 +54,7 @@ import { WidgetsModule } from './widgets/widgets.module';
     WidgetsModule,
     EmailsModule,
     LibModule,
+    LocalizationModule,
   ],
   controllers: [AppController],
   providers: [

@@ -24,12 +24,8 @@ const SignInForm = () => {
 					password,
 					callbackUrl: searchParams.get('callbackUrl') || '/',
 				})
-				console.log(res)
 				res?.ok && toast.success('Вход выполнен!')
 			} catch (error) {
-				//@ts-ignore
-				console.log(error, error.message)
-				//@ts-ignore
 				toast.error('Произошла ошибка! Попробуйте снова.')
 			}
 		})

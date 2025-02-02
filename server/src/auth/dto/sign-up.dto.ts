@@ -5,10 +5,10 @@ export class SignUpDto {
   email: string;
 
   @IsNotEmpty()
-  @MinLength(2)
+  @MinLength(3, { message: 'Минимальная длина названия - 3 символа.' })
   name: string;
 
   @IsNotEmpty()
-  @MinLength(5)
+  @MinLength(5, { message: 'Минимальная длина пароля - 5 символов.' })
   password: string;
 }

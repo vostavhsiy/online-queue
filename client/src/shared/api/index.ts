@@ -1,1 +1,1 @@
-export { getMainInstance, mainInstance } from './instances'
+export * from './instances'

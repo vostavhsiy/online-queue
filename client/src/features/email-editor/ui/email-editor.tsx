@@ -58,7 +58,7 @@ const EmailEditor: FC<Props> = ({
 					emailId,
 					isUnmake ? { unmakeCustomHtml: html } : { makeCustomHtml: html }
 				)
-				if (!res || typeof res === 'string')
+				if (!res || typeof res === 'string' || Array.isArray(res))
 					toast.error(res || 'Произошла ошибка. Попробуйте позже.')
 				else toast.success('Сохранено!')
 			} catch (error) {
@@ -75,7 +75,7 @@ const EmailEditor: FC<Props> = ({
 					emailId,
 					isUnmake ? { unmakeCustomHtml: null } : { makeCustomHtml: null }
 				)
-				if (!res || typeof res === 'string')
+				if (!res || typeof res === 'string' || Array.isArray(res))
 					toast.error(res || 'Произошла ошибка. Попробуйте позже.')
 				else {
 					setPreviewHtml(emailHtml)
