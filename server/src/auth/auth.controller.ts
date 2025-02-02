@@ -36,7 +36,6 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('signup')
   signUp(@Body() signUpDto: SignUpDto) {
-    console.log(signUpDto);
     return this.authService.signUp(
       signUpDto.email,
       signUpDto.name,

@@ -31,9 +31,7 @@ export class AuthService {
   }
 
   async signIn(email: string, password: string) {
-    console.log(email);
     const company = await this.companiesService.findOne(email);
-    console.log(company);
     if (!company || !compareSync(password, company.password)) {
       throw new UnauthorizedException();
     }
