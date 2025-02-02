@@ -52,7 +52,7 @@ const WidgetEditor: FC<Props> = ({ widgetHtml, widgetId }) => {
 		if (!html) return
 		setFormMode(false)
 		setPreviewHtml(html)
-		editorRef.current?.resize()
+		// editorRef.current?.resize()
 	}
 
 	const save = () => {

@@ -1,9 +1,10 @@
-import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as path from 'path';
 import { AppModule } from './app.module';
+import { LocaleValidationPipe } from './localization/locale-validation.pipe';
+import { LocalizationService } from './localization/localization.service';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -14,7 +15,12 @@ async function bootstrap() {
   // app.useStaticAssets(path.join(__dirname, '..', 'assets'));
   app.setBaseViewsDir(path.join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
-  app.useGlobalPipes(new ValidationPipe());
+
+  const localizationService = app.get(LocalizationService);
+  app.useGlobalPipes(
+    // new ValidationPipe(),
+    new LocaleValidationPipe(localizationService),
+  );
 
   const config = new DocumentBuilder()
     .setTitle('Online-queue')

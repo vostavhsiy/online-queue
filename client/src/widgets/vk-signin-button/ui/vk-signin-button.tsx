@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { FC, Suspense } from 'react'
 import { useFormStatus } from 'react-dom'
+import { toast } from 'sonner'
 import styles from './styles.module.scss'
 
 interface Props extends ButtonProps {
@@ -23,6 +24,8 @@ const VkSignInButton: FC<Props> = ({ className, ...props }) => {
 			callbackUrl: searchParams.get('callbackUrl') || '/',
 		}).then(res => {
 			console.log(res)
+			res?.ok && toast.success('Вход выполнен!')
+			res?.error && toast.error('Произошла ошибка!')
 		})
 	}
 

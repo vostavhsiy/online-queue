@@ -108,7 +108,7 @@ const CreateEventForm = () => {
 						  }
 						: undefined,
 				})
-				if (!res || typeof res === 'string')
+				if (!res || typeof res === 'string' || Array.isArray(res))
 					toast.error(res || 'Произошла ошибка. Попробуйте позже.')
 				else {
 					router.push('/dashboard/events')
