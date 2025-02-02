@@ -25,12 +25,10 @@ export class CompanyApi {
 	}
 
 	static async signIn(payload: SignInPayload) {
-		console.log(mainInstance.getUri(), payload)
-		const { data, ...rest } = await mainInstance.post<SignInResponse>(
+		const { data } = await mainInstance.post<SignInResponse>(
 			'/auth/login',
 			payload
 		)
-		console.log(rest)
 		return data
 	}
 

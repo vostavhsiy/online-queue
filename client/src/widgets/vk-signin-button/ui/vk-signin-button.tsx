@@ -23,7 +23,6 @@ const VkSignInButton: FC<Props> = ({ className, ...props }) => {
 		signIn('vk', {
 			callbackUrl: searchParams.get('callbackUrl') || '/',
 		}).then(res => {
-			console.log(res)
 			res?.ok && toast.success('Вход выполнен!')
 			res?.error && toast.error('Произошла ошибка!')
 		})

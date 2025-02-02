@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Header,
   HttpCode,
   HttpStatus,
   Post,
@@ -21,7 +22,6 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('login')
   signIn(@Body() signInDto: SignInDto) {
-    console.log(signInDto);
     return this.authService.signIn(signInDto.email, signInDto.password);
   }
 
@@ -46,6 +46,7 @@ export class AuthController {
   @Public()
   @HttpCode(HttpStatus.OK)
   @Get('/')
+  @Header('Content-Type', 'application/json')
   auth(@Req() request: Request) {
     return this.authService.auth(
       request?.headers?.authorization?.split(' ')[1],
