@@ -160,7 +160,7 @@ export const Intro = () => {
 					</div>
 					<h1
 						ref={title}
-						className='relative opacity-0 p-4 text-7xl tracking-wider text-primary'
+						className='relative text-center opacity-0 p-4 text-7xl tracking-wider text-primary'
 					></h1>
 				</div>
 				<div
