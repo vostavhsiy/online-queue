@@ -30,8 +30,6 @@ export class CompaniesService {
         },
       },
     });
-    company.widget.customHtml = JSON.stringify(company.widget.customHtml);
-    console.log(company.widget.customHtml);
     return company;
   }
 
