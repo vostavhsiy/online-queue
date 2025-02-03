@@ -1,4 +1,4 @@
-const link = 'http://localhost'
+const link = process.env.NEXTAUTH_URL || 'http://localhost'
 
 const PrivacyScreen = () => {
 	return (
