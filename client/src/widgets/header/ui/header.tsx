@@ -33,10 +33,7 @@ export const Header = () => {
 				ref={inner}
 				className={cn('container px-8 py-2 flex items-center justify-between')}
 			>
-				<div className='flex items-center gap-3'>
-					<Logo />
-					<span>Онлайн очередь</span>
-				</div>
+				<Logo />
 				<div className='flex items-center gap-3'>
 					<Link
 						href={'/#contacts'}

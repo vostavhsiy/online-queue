@@ -5,10 +5,7 @@ export const Footer = () => {
 	return (
 		<footer className='py-5 border-t'>
 			<div className='mx-auto px-8 container flex items-center justify-between'>
-				<div className='flex items-center gap-3'>
-					<Logo />
-					<span>Онлайн очередь</span>
-				</div>
+				<Logo />
 				<div className='flex items-center'>
 					<Link
 						href={'/#contacts'}
