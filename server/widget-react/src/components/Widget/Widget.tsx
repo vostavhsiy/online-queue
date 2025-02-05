@@ -68,7 +68,7 @@ const Widget: FC<Props> = ({ widgetId }) => {
           };
           setFetching(true);
           //@ts-ignore
-          fetch(event.target.action, {
+          fetch(apiUrl + "/customers", {
             body: JSON.stringify(body),
             method: 'post',
             headers: {
