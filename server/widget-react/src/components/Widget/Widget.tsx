@@ -8,7 +8,7 @@ import { FC, useEffect, useRef, useState } from 'react';
 import Loader from '../Loader/Loader';
 import styles from './Widget.module.css';
 
-const apiUrl = 'https://online-queue.ru/server';
+const apiUrl = 'https://online-queue-production.up.railway.app/server';
 
 interface Props {
   widgetId?: string;
